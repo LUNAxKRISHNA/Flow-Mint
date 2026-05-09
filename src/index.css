@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -24,7 +26,7 @@
     --accent-foreground: 0 0% 0%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    /* Borders: Grey #333333 (as requested for elements) */
+    /* Borders: Grey #333333 */
     --border: 0 0% 20%;
     --input: 0 0% 20%;
     --ring: 111 100% 54%;
@@ -38,15 +40,236 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Space Grotesk', sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
-/* Custom Utilities for smooth gradients and shadows */
+/* ── Existing Utilities ──────────────────────────────────────────── */
 .glass {
   @apply bg-background/80 backdrop-blur-md border border-border/50 shadow-sm;
 }
 
 .text-gradient {
   @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-emerald-600;
+}
+
+/* ── System Grid Background ──────────────────────────────────────── */
+.system-grid {
+  background-image:
+    linear-gradient(rgba(57, 255, 20, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57, 255, 20, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.system-grid-dark {
+  background-image:
+    linear-gradient(rgba(57, 255, 20, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57, 255, 20, 0.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.system-grid-fine {
+  background-image:
+    linear-gradient(rgba(26, 26, 26, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26, 26, 26, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ── Glow Effects ────────────────────────────────────────────────── */
+.glow-primary {
+  box-shadow: 0 0 20px rgba(57, 255, 20, 0.2), 0 0 40px rgba(57, 255, 20, 0.08);
+}
+
+.glow-primary-sm {
+  box-shadow: 0 0 8px rgba(57, 255, 20, 0.25), 0 0 16px rgba(57, 255, 20, 0.10);
+}
+
+.glow-primary-text {
+  text-shadow: 0 0 20px rgba(57, 255, 20, 0.5);
+}
+
+/* ── Corner Tick Marks ───────────────────────────────────────────── */
+.corner-marks {
+  position: relative;
+}
+.corner-marks::before,
+.corner-marks::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: #39FF14;
+  border-style: solid;
+}
+.corner-marks::before {
+  top: -1px;
+  left: -1px;
+  border-width: 1px 0 0 1px;
+}
+.corner-marks::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 1px 1px 0;
+}
+
+/* ── Coordinate Marker ───────────────────────────────────────────── */
+.coord-label {
+  font-size: 9px;
+  font-family: 'Space Grotesk', monospace;
+  letter-spacing: 0.08em;
+  color: rgba(57, 255, 20, 0.5);
+  text-transform: uppercase;
+}
+
+.meta-label {
+  font-size: 9px;
+  font-family: 'Space Grotesk', monospace;
+  letter-spacing: 0.12em;
+  color: rgba(26, 26, 26, 0.35);
+  text-transform: uppercase;
+}
+
+/* ── Scanning Line Animation ─────────────────────────────────────── */
+.scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(57, 255, 20, 0.4) 50%, transparent 100%);
+  animation: scanPulse 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ── Status Pulse ────────────────────────────────────────────────── */
+.status-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #39FF14;
+  animation: statusBlink 2s ease-in-out infinite;
+}
+
+/* ── Thin Structural Lines ───────────────────────────────────────── */
+.hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(26,26,26,0.15) 20%, rgba(26,26,26,0.15) 80%, transparent 100%);
+}
+
+.hairline-v {
+  width: 1px;
+  background: linear-gradient(180deg, transparent 0%, rgba(26,26,26,0.15) 20%, rgba(26,26,26,0.15) 80%, transparent 100%);
+}
+
+/* ── System Node ─────────────────────────────────────────────────── */
+.sys-node {
+  border: 1px solid rgba(26, 26, 26, 0.2);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+.sys-node:hover {
+  border-color: rgba(57, 255, 20, 0.6);
+  box-shadow: 0 0 16px rgba(57, 255, 20, 0.15), 0 4px 24px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
+}
+
+/* ── Animated Connection Line ────────────────────────────────────── */
+.flow-path {
+  stroke-dasharray: 6 4;
+  animation: flowDash 1.5s linear infinite;
+}
+
+/* ── Keyframe Animations ─────────────────────────────────────────── */
+@keyframes scanPulse {
+  0%   { top: 0%; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@keyframes statusBlink {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(57, 255, 20, 0.8); }
+  50%       { opacity: 0.4; box-shadow: 0 0 2px rgba(57, 255, 20, 0.3); }
+}
+
+@keyframes nodeFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+
+@keyframes nodeFloatAlt {
+  0%, 100% { transform: translateY(-4px); }
+  50%       { transform: translateY(4px); }
+}
+
+@keyframes flowDash {
+  from { stroke-dashoffset: 20; }
+  to   { stroke-dashoffset: 0; }
+}
+
+@keyframes dataStream {
+  from { stroke-dashoffset: 100; }
+  to   { stroke-dashoffset: 0; }
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlideLeft {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(57, 255, 20, 0.2); }
+  50%       { box-shadow: 0 0 28px rgba(57, 255, 20, 0.45); }
+}
+
+@keyframes ctaReveal {
+  from { opacity: 0; transform: translateY(40px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── Utility Animation Classes ───────────────────────────────────── */
+.animate-fade-up      { animation: fadeSlideUp 0.7s cubic-bezier(0.16,1,0.3,1) both; }
+.animate-fade-left    { animation: fadeSlideLeft 0.7s cubic-bezier(0.16,1,0.3,1) both; }
+.animate-node-float   { animation: nodeFloat 5s ease-in-out infinite; }
+.animate-node-float-alt { animation: nodeFloatAlt 6s ease-in-out infinite; }
+.animate-glow-pulse   { animation: glowPulse 3s ease-in-out infinite; }
+.animate-cta-reveal   { animation: ctaReveal 1s cubic-bezier(0.16,1,0.3,1) both; }
+
+/* ── Editorial Typography ────────────────────────────────────────── */
+.editorial-heading {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+}
+
+.mono-label {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+@keyframes logo-bloom {
+  0%, 100% { filter: grayscale(0.9) brightness(0.4) blur(1px); opacity: 0.4; }
+  50% { filter: grayscale(0) brightness(1.2) blur(0px) drop-shadow(0 0 12px rgba(57, 255, 20, 0.4)); opacity: 1; }
+}
+
+.animate-logo-smooth {
+  animation: logo-bloom 3s infinite ease-in-out;
+}
+
+@keyframes scrollLog {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-30%); }
+}
+
+.animate-scroll-log {
+  animation: scrollLog 15s linear infinite;
 }

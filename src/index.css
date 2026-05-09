@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root, .dark {
+    /* Background: Light greyish white */
+    --background: 0 0% 97%;
+    /* Text: Dark Grey #1a1a1a */
+    --foreground: 0 0% 10%;
+    /* Cards: White for light theme feel */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    /* Primary Neon Green: #39FF14 */
+    --primary: 111 100% 54%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 90%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 0 0% 92%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 111 100% 54%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    /* Borders: Grey #333333 (as requested for elements) */
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 111 100% 54%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Custom Utilities for smooth gradients and shadows */
+.glass {
+  @apply bg-background/80 backdrop-blur-md border border-border/50 shadow-sm;
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-emerald-600;
+}

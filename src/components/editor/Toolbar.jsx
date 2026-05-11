@@ -1,12 +1,12 @@
 import { Type, Image as ImageIcon, Database, ZoomIn, ZoomOut, MousePointer2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-export default function Toolbar({ onOpenCsvModal }) {
+export default function Toolbar({ onOpenCsvModal, onAddPlaceholder }) {
   return (
     <aside className="w-16 border-r border-border bg-card/50 flex flex-col items-center py-4 gap-4 z-10 shadow-sm">
       <div className="flex flex-col gap-2">
         <ToolbarButton icon={<MousePointer2 />} label="Select" active />
-        <ToolbarButton icon={<Type />} label="Add Text" />
+        <ToolbarButton icon={<Type />} label="Add Text Field" onClick={onAddPlaceholder} />
       </div>
       
       <div className="h-px w-8 bg-border" />
@@ -44,3 +44,4 @@ function ToolbarButton({ icon, label, active, onClick }) {
     </div>
   )
 }
+

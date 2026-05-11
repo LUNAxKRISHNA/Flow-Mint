@@ -44,7 +44,7 @@ export default function Navbar() {
         {/* LEFT SIDE: Workspace, Templates */}
         <div className="flex items-center gap-10 w-1/3 pl-4">
           <button
-            onClick={() => scrollTo("workspace")}
+            onClick={() => navigate("/setup")}
             className="group flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity"
           >
             <span className="text-[9px] font-mono tracking-widest text-[#1a1a1a]/50 group-hover:text-[#39FF14] transition-colors">01</span>

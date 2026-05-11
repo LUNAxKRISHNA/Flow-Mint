@@ -41,7 +41,7 @@ export function SplashSection() {
       {/* Enter Workspace Link */}
       <div className="absolute bottom-20 right-12 z-20">
         <button
-          onClick={() => navigate("/editor")}
+          onClick={() => navigate("/setup")}
           className="group flex flex-col items-end gap-1"
         >
           <div className="flex items-center gap-2 text-foreground/80 hover:text-foreground transition-colors font-medium">
@@ -197,7 +197,7 @@ export function HeroSection() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.62 }}
           >
             <button
-              onClick={() => navigate("/editor")}
+              onClick={() => navigate("/setup")}
               className="group flex items-center gap-2 px-6 py-3 bg-white text-black text-sm font-semibold rounded-sm hover:bg-primary hover:text-black transition-all duration-200 animate-glow-pulse"
             >
               <span>Initialize Workspace</span>

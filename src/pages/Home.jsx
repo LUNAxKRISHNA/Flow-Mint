@@ -15,8 +15,8 @@ export default function Home() {
       <div id="hero">
         <HeroSection />
         <WorkflowSection />
-        {/* <EditorPreviewSection /> */}
-        {/* <FeaturesSection /> */}
+        <EditorPreviewSection />
+        <FeaturesSection />
       </div>
     </div>
   )

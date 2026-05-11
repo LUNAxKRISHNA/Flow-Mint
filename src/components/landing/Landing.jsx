@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { BlueprintReveal, SectionReveal, ItemReveal, StaggerContainer, StaggerItem } from "./ScrollReveal";
 
 // --- SplashSection.jsx ---
 export function SplashSection() {
@@ -53,7 +55,7 @@ export function SplashSection() {
       </div>
 
       {/* Decorative Dot Matrix Top Left */}
-      <div className="absolute top-32 left-32 grid grid-cols-6 gap-3 opacity-20 pointer-events-none hidden md:grid">
+      <div className="absolute top-32 left-32 grid-cols-6 gap-3 opacity-20 pointer-events-none hidden md:grid">
         {[...Array(24)].map((_, i) => (
           <div key={i} className="w-1 h-1 rounded-full bg-foreground" />
         ))}
@@ -127,7 +129,7 @@ export function HeroSection() {
   const navigate = useNavigate()
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden system-grid">
+    <section className="relative min-h-screen flex items-center overflow-hidden system-grid-dark bg-foreground">
       {/* Background glow blob */}
       <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-primary/10 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-primary/5 blur-[80px] rounded-full pointer-events-none" />
@@ -136,59 +138,89 @@ export function HeroSection() {
       <div className="scan-line" />
 
       {/* Corner coord markers */}
-      <span className="absolute bottom-8 left-6 coord-label">.-.. ..- -. .-</span>
-      <span className="absolute bottom-8 right-6 coord-label">LATENCY: &lt;2ms</span>
+      <span className="absolute bottom-8 left-6 coord-label" style={{ color: "rgba(57,255,20,0.3)" }}>.-.. ..- -. .-</span>
+      <span className="absolute bottom-8 right-6 coord-label" style={{ color: "rgba(57,255,20,0.3)" }}>LATENCY: &lt;2ms</span>
 
       <div className="w-full max-w-[1400px] mx-auto px-8 pt-28 pb-16 grid grid-cols-1 lg:grid-cols-[1fr_1px_1fr] gap-0 items-center">
 
         {/* ── Left: Editorial Typography ─────────────────────────── */}
-        <div className="pr-0 lg:pr-16 py-8" style={{ animationDelay: "0.1s" }}>
+        <div className="pr-0 lg:pr-16 py-8">
           {/* Giant editorial heading — fragmented layout */}
           <div className="mb-8">
             <div className="overflow-hidden">
-              <h1 className="editorial-heading text-[72px] md:text-[96px] lg:text-[108px] text-foreground leading-none animate-fade-up" style={{ animationDelay: "0.05s" }}>
+              <motion.h1
+                className="editorial-heading text-[72px] md:text-[96px] lg:text-[108px] text-white leading-none"
+                initial={{ y: "110%", opacity: 0 }}
+                animate={{ y: "0%", opacity: 1 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              >
                 DOCUMENT
-              </h1>
+              </motion.h1>
             </div>
             <div className="overflow-hidden pl-8 md:pl-16">
-              <h1 className="editorial-heading text-[72px] md:text-[96px] lg:text-[108px] text-foreground leading-none animate-fade-up" style={{ animationDelay: "0.15s" }}>
+              <motion.h1
+                className="editorial-heading text-[72px] md:text-[96px] lg:text-[108px] text-white leading-none"
+                initial={{ y: "110%", opacity: 0 }}
+                animate={{ y: "0%", opacity: 1 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
+              >
                 AUTO<span style={{ color: "#39FF14" }}>MATION</span>
-              </h1>
+              </motion.h1>
             </div>
             <div className="overflow-hidden">
-              <h1 className="editorial-heading text-[72px] md:text-[96px] lg:text-[108px] text-foreground/20 leading-none animate-fade-up" style={{ animationDelay: "0.25s" }}>
+              <motion.h1
+                className="editorial-heading text-[72px] md:text-[96px] lg:text-[108px] text-foreground/20 leading-none"
+                initial={{ y: "110%", opacity: 0 }}
+                animate={{ y: "0%", opacity: 1 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.34 }}
+              >
                 REIMAGINED.
-              </h1>
+              </motion.h1>
             </div>
           </div>
 
           {/* Sub-tagline */}
-          <p className="text-base text-foreground/50 max-w-sm leading-relaxed mb-10 animate-fade-up" style={{ animationDelay: "0.35s" }}>
+          <motion.p
+            className="text-base text-white/40 max-w-sm leading-relaxed mb-10"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+          >
             Upload templates, map spreadsheet data, and generate hundreds of personalized documents in seconds.
-          </p>
+          </motion.p>
 
           {/* CTA row */}
-          <div className="flex items-center gap-4 animate-fade-up" style={{ animationDelay: "0.45s" }}>
+          <motion.div
+            className="flex items-center gap-4"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.62 }}
+          >
             <button
               onClick={() => navigate("/editor")}
-              className="group flex items-center gap-2 px-6 py-3 bg-foreground text-background text-sm font-semibold rounded-sm hover:bg-primary hover:text-foreground transition-all duration-200 animate-glow-pulse"
+              className="group flex items-center gap-2 px-6 py-3 bg-white text-black text-sm font-semibold rounded-sm hover:bg-primary hover:text-black transition-all duration-200 animate-glow-pulse"
             >
               <span>Initialize Workspace</span>
             </button>
-          </div>
+          </motion.div>
         </div>
 
         {/* ── Vertical Divider ───────────────────────────────────── */}
-        <div className="hidden lg:block hairline-v self-stretch mx-0" />
+        <div className="hidden lg:block hairline-v self-stretch mx-0" style={{ background: "linear-gradient(180deg, transparent 0%, rgba(57,255,20,0.15) 20%, rgba(57,255,20,0.15) 80%, transparent 100%)" }} />
 
         {/* ── Right: Workflow Visualization ─────────────────────── */}
-        <div className="relative pl-0 lg:pl-16 py-8 flex items-center justify-center animate-fade-left" style={{ animationDelay: "0.3s" }}>
+        <motion.div
+          className="relative pl-0 lg:pl-16 py-8 flex items-center justify-center"
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+        >
           <HeroVisualization />
-        </div>
+        </motion.div>
       </div>
 
       {/* Bottom hairline */}
-      <div className="absolute bottom-0 left-0 right-0 hairline" />
+      <div className="absolute bottom-0 left-0 right-0 hairline" style={{ background: "rgba(57,255,20,0.15)" }} />
     </section>
   )
 }
@@ -198,69 +230,69 @@ function HeroVisualization() {
     <div className="relative w-full max-w-[480px] h-[520px]">
 
       {/* Background grid panel */}
-      <div className="absolute inset-0 system-grid-fine rounded-sm border border-border/10 opacity-60" />
+      <div className="absolute inset-0 system-grid-dark rounded-sm border border-white/5" />
 
       {/* Node: Template */}
-      <div className="absolute top-10 left-6 animate-node-float" style={{ animationDelay: "0s" }}>
-        <div className="sys-node corner-marks rounded-sm px-4 py-3 w-52">
+      <div className="absolute top-12 left-0 animate-node-float" style={{ animationDelay: "0s" }}>
+        <div className="sys-node corner-marks rounded-sm px-4 py-3 w-52 bg-zinc-900/60 border-white/5 backdrop-blur-xl hover:border-primary/30 transition-all">
           <div className="flex items-center gap-2 mb-2">
             <div className="w-2 h-2 bg-primary rounded-full" />
-            <span className="mono-label text-foreground/40">TEMPLATE</span>
+            <span className="mono-label text-white/40">TEMPLATE</span>
           </div>
-          <p className="text-sm font-semibold text-foreground">certificate.png</p>
+          <p className="text-sm font-semibold text-white">certificate.png</p>
           <div className="mt-2 space-y-1">
             {["{{name}}", "{{date}}", "{{score}}"].map(p => (
               <div key={p} className="text-xs font-mono text-primary/70 bg-primary/5 px-2 py-0.5 rounded-sm border border-primary/15">{p}</div>
             ))}
           </div>
-          <span className="absolute -bottom-4 left-2 coord-label">[LAYER 0]</span>
+          <span className="absolute -bottom-4 left-2 coord-label" style={{ color: "rgba(57,255,20,0.2)" }}>[LAYER 0]</span>
         </div>
       </div>
 
       {/* Node: Data Source */}
-      <div className="absolute top-8 right-4 animate-node-float-alt" style={{ animationDelay: "0.5s" }}>
-        <div className="sys-node corner-marks rounded-sm px-4 py-3 w-44">
+      <div className="absolute top-4 right-0 animate-node-float-alt" style={{ animationDelay: "0.5s" }}>
+        <div className="sys-node corner-marks rounded-sm px-4 py-3 w-44 bg-zinc-900/60 border-white/5 backdrop-blur-xl hover:border-primary/30 transition-all">
           <div className="flex items-center gap-2 mb-2">
             <div className="w-2 h-2 bg-blue-400 rounded-full" />
-            <span className="mono-label text-foreground/40">DATA</span>
+            <span className="mono-label text-white/40">DATA</span>
           </div>
-          <p className="text-sm font-semibold text-foreground">students.csv</p>
+          <p className="text-sm font-semibold text-white">students.csv</p>
           <div className="mt-2 space-y-1">
             {[["Name", "Alice"], ["Date", "2026-05"], ["Score", "98.4"]].map(([k, v]) => (
               <div key={k} className="flex justify-between text-xs">
-                <span className="text-foreground/40">{k}</span>
-                <span className="font-medium">{v}</span>
+                <span className="text-white/40">{k}</span>
+                <span className="font-medium text-white/70">{v}</span>
               </div>
             ))}
           </div>
-          <div className="mt-2 text-xs text-foreground/30">+147 rows</div>
+          <div className="mt-2 text-xs text-white/20">+147 rows</div>
         </div>
       </div>
 
       {/* Node: Mapping Engine */}
       <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 animate-node-float" style={{ animationDelay: "1s" }}>
-        <div className="sys-node corner-marks rounded-sm px-5 py-4 w-48 text-center border-primary/30" style={{ borderColor: "rgba(57,255,20,0.3)" }}>
+        <div className="sys-node corner-marks rounded-sm px-5 py-4 w-48 text-center bg-zinc-900/60 border-primary/20 backdrop-blur-xl hover:border-primary/50 transition-all" style={{ borderColor: "rgba(57,255,20,0.3)" }}>
           <div className="flex items-center justify-center gap-2 mb-2">
             <span className="status-pulse" />
             <span className="mono-label text-primary/70">MAPPING ENGINE</span>
           </div>
-          <p className="text-xs text-foreground/50">Processing fields…</p>
-          <div className="mt-3 h-1.5 bg-muted rounded-full overflow-hidden">
+          <p className="text-xs text-white/50">Processing fields…</p>
+          <div className="mt-3 h-1.5 bg-white/10 rounded-full overflow-hidden">
             <div className="h-full bg-primary rounded-full w-3/4 animate-glow-pulse" />
           </div>
-          <p className="text-xs text-foreground/40 mt-1">3 / 4 mapped</p>
+          <p className="text-xs text-white/40 mt-1">3 / 4 mapped</p>
         </div>
       </div>
 
       {/* Node: Output */}
-      <div className="absolute bottom-12 right-6 animate-node-float-alt" style={{ animationDelay: "0.8s" }}>
-        <div className="sys-node corner-marks rounded-sm px-4 py-3 w-44">
+      <div className="absolute bottom-9 right-[-30px] animate-node-float-alt" style={{ animationDelay: "0.8s" }}>
+        <div className="sys-node corner-marks rounded-sm px-4 py-3 w-44 bg-zinc-900/60 border-white/5 backdrop-blur-xl hover:border-primary/30 transition-all">
           <div className="flex items-center gap-2 mb-2">
             <div className="w-2 h-2 bg-orange-400 rounded-full" />
-            <span className="mono-label text-foreground/40">OUTPUT</span>
+            <span className="mono-label text-white/40">OUTPUT</span>
           </div>
-          <p className="text-sm font-semibold text-foreground">148 PDFs</p>
-          <p className="text-xs text-foreground/40 mt-1">Generated in 1.2s</p>
+          <p className="text-sm font-semibold text-white">148 PDFs</p>
+          <p className="text-xs text-white/40 mt-1">Generated in 1.2s</p>
           <div className="mt-2 flex gap-1">
             {[...Array(5)].map((_, i) => (
               <div key={i} className="flex-1 h-1 bg-primary/30 rounded-full" />
@@ -270,10 +302,10 @@ function HeroVisualization() {
       </div>
 
       {/* Node: Status indicator bottom left */}
-      <div className="absolute bottom-10 left-6 animate-node-float" style={{ animationDelay: "1.5s" }}>
-        <div className="sys-node rounded-sm px-3 py-2 text-xs">
-          <span className="mono-label text-foreground/40">QUEUE:</span>
-          <span className="text-foreground/70 ml-2">148 jobs done</span>
+      <div className="absolute bottom-10 left-0 animate-node-float" style={{ animationDelay: "1.5s" }}>
+        <div className="sys-node rounded-sm px-3 py-2 text-xs bg-zinc-900/60 border-white/5 backdrop-blur-xl hover:border-primary/30 transition-all">
+          <span className="mono-label text-white/40">QUEUE:</span>
+          <span className="text-white/70 ml-2">148 jobs done</span>
         </div>
       </div>
 
@@ -293,10 +325,10 @@ function HeroVisualization() {
       </svg>
 
       {/* Corner coordinate labels */}
-      <span className="absolute top-2 left-2 coord-label">[0,0]</span>
-      <span className="absolute top-2 right-2 coord-label">[480,0]</span>
-      <span className="absolute bottom-2 left-2 coord-label">[0,520]</span>
-      <span className="absolute bottom-2 right-2 coord-label">[480,520]</span>
+      <span className="absolute top-2 left-2 coord-label" style={{ color: "rgba(57,255,20,0.2)" }}>[0,0]</span>
+      <span className="absolute top-2 right-2 coord-label" style={{ color: "rgba(57,255,20,0.2)" }}>[480,0]</span>
+      <span className="absolute bottom-2 left-2 coord-label" style={{ color: "rgba(57,255,20,0.2)" }}>[0,520]</span>
+      <span className="absolute bottom-2 right-2 coord-label" style={{ color: "rgba(57,255,20,0.2)" }}>[480,520]</span>
     </div>
   )
 }
@@ -369,12 +401,12 @@ export function WorkflowSection() {
   return (
     <section id="workflow" className="relative py-32 overflow-hidden">
       {/* Subtle background */}
-      <div className="absolute inset-0 system-grid-fine opacity-50" />
+      <div className="absolute inset-0 system-grid-fine" />
       <div className="absolute top-0 left-0 right-0 hairline" />
       <div className="absolute bottom-0 left-0 right-0 hairline" />
 
       {/* Top label */}
-      <div className="relative max-w-[1400px] mx-auto px-8 mb-16">
+      <BlueprintReveal className="relative max-w-[1400px] mx-auto px-8 mb-16" delay={0}>
         <div className="flex items-end justify-between">
           <div>
             <span className="mono-label text-foreground/30 block mb-3">§ 02 — WORKFLOW ARCHITECTURE</span>
@@ -388,7 +420,7 @@ export function WorkflowSection() {
           </div>
         </div>
         <div className="hairline mt-8" />
-      </div>
+      </BlueprintReveal>
 
       {/* Pipeline grid */}
       <div className="relative max-w-[1400px] mx-auto px-8">
@@ -396,14 +428,14 @@ export function WorkflowSection() {
 
           {/* Left: Workflow Grid */}
           <div className="relative max-w-3xl">
-            <div className="grid grid-cols-2 gap-6 md:gap-10 relative z-10">
+            <StaggerContainer className="grid grid-cols-2 gap-6 md:gap-10 relative z-10" delay={0.15} stagger={0.12}>
               {/* Row 1 */}
-              <WorkflowNode node={WORKFLOW_NODES[0]} delay="0s" />
-              <WorkflowNode node={WORKFLOW_NODES[1]} delay="0.1s" />
+              <StaggerItem><WorkflowNode node={WORKFLOW_NODES[0]} delay="0s" /></StaggerItem>
+              <StaggerItem><WorkflowNode node={WORKFLOW_NODES[1]} delay="0s" /></StaggerItem>
               {/* Row 2 — reversed for flow effect */}
-              <WorkflowNode node={WORKFLOW_NODES[3]} delay="0.3s" />
-              <WorkflowNode node={WORKFLOW_NODES[2]} delay="0.2s" />
-            </div>
+              <StaggerItem><WorkflowNode node={WORKFLOW_NODES[3]} delay="0s" /></StaggerItem>
+              <StaggerItem><WorkflowNode node={WORKFLOW_NODES[2]} delay="0s" /></StaggerItem>
+            </StaggerContainer>
 
             {/* SVG Flow Paths (layered over grid) */}
             <svg
@@ -432,9 +464,9 @@ export function WorkflowSection() {
           <div className="hidden xl:block hairline-v" />
 
           {/* Right: Technical Panel */}
-          <div className="hidden xl:block">
+          <ItemReveal className="hidden xl:block" direction="left" delay={0.3}>
             <WorkflowDiagnostics />
-          </div>
+          </ItemReveal>
 
         </div>
       </div>
@@ -445,7 +477,7 @@ export function WorkflowSection() {
 function WorkflowNode({ node, delay }) {
   return (
     <div
-      className="relative sys-node corner-marks rounded-sm p-6 group"
+      className="relative sys-node corner-marks rounded-sm p-6 group bg-white/80"
       style={{ animationDelay: delay }}
     >
       {/* Top row */}
@@ -483,7 +515,7 @@ export function EditorPreviewSection() {
   return (
     <section id="editor-preview" className="relative py-32 overflow-hidden bg-foreground">
       {/* Dark grid background */}
-      <div className="absolute inset-0 system-grid-dark opacity-60" />
+      <div className="absolute inset-0 system-grid-dark" />
       {/* Glow blob */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full pointer-events-none"
         style={{ background: "radial-gradient(ellipse, rgba(57,255,20,0.08) 0%, transparent 70%)" }}
@@ -502,7 +534,7 @@ export function EditorPreviewSection() {
 
       <div className="relative max-w-[1400px] mx-auto px-8">
         {/* Section heading */}
-        <div className="mb-14">
+        <BlueprintReveal className="mb-14" delay={0}>
           <h2 className="editorial-heading text-[52px] md:text-[72px] leading-none text-white">
             FUTURISTIC<br />
             <span style={{ color: "#39FF14" }}>WORKSPACE.</span>
@@ -510,9 +542,10 @@ export function EditorPreviewSection() {
           <p className="text-sm mt-4 max-w-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.35)" }}>
             Precision placement. Every pixel deliberate. A canvas engineered for creative control.
           </p>
-        </div>
+        </BlueprintReveal>
 
         {/* Editor UI mockup */}
+        <SectionReveal delay={0.3}>
         <div className="relative rounded-sm overflow-hidden border" style={{ borderColor: "rgba(57,255,20,0.15)", background: "rgba(255,255,255,0.03)", backdropFilter: "blur(4px)" }}>
 
           {/* Editor top bar */}
@@ -555,7 +588,7 @@ export function EditorPreviewSection() {
             {/* Center: Canvas */}
             <div className="flex-1 flex items-center justify-center p-8 relative" style={{ background: "rgba(0,0,0,0.1)" }}>
               {/* Alignment grid */}
-              <div className="absolute inset-0 system-grid-dark opacity-30" />
+              <div className="absolute inset-0 system-grid-dark" />
 
               {/* A4 document mock */}
               <div className="relative shadow-2xl" style={{ width: 260, height: 360, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 2 }}>
@@ -635,6 +668,7 @@ export function EditorPreviewSection() {
             <span className="mono-label" style={{ color: "rgba(255,255,255,0.15)" }}>A4 — 210×297mm</span>
           </div>
         </div>
+        </SectionReveal>
       </div>
     </section>
   )
@@ -644,12 +678,10 @@ export function EditorPreviewSection() {
 const FEATURES = [
   { id: "mapping", label: "01", title: "Dynamic Placeholder Mapping", desc: "Insert {{variables}} with pixel precision into any document zone.", meta: "CORE ENGINE", size: "large" },
   { id: "spreadsheet", label: "02", title: "Spreadsheet Integration", desc: "Bind CSV or XLSX columns directly to template variables.", meta: "DATA LAYER", size: "medium" },
-  { id: "bulk", label: "03", title: "Bulk Document Generation", desc: "Render hundreds of personalized outputs in a single job.", meta: "RENDER CORE", size: "large" },
+  { id: "bulk", label: "03", title: "Bulk Document Generation", desc: "Render multiple personalized outputs in a single job.", meta: "RENDER CORE", size: "large" },
   { id: "detection", label: "04", title: "Smart Variable Detection", desc: "Auto-detect and validate all {{tokens}} in your template.", meta: "AI ASSIST", size: "small" },
   { id: "preview", label: "05", title: "Real-time Preview", desc: "See live document changes as you map and configure.", meta: "LIVE UI", size: "small" },
   { id: "automation", label: "06", title: "Workflow Automation", desc: "Schedule, trigger, and chain generation pipelines.", meta: "PIPELINE", size: "medium" },
-  { id: "export", label: "07", title: "Export System", desc: "Download as PDF or DOCX, individually or as a ZIP archive.", meta: "OUTPUT", size: "small" },
-  { id: "templates", label: "08", title: "Reusable Templates", desc: "Save, version, and reuse your best-performing templates.", meta: "LIBRARY", size: "medium" },
 ]
 
 const sizeClasses = {
@@ -661,11 +693,12 @@ const sizeClasses = {
 export function FeaturesSection() {
   return (
     <section id="features" className="relative py-32 overflow-hidden">
-      <div className="absolute inset-0 system-grid-fine opacity-40" />
+      <div className="absolute inset-0 system-grid-fine" />
       <div className="absolute top-0 left-0 right-0 hairline" />
 
       <div className="relative max-w-[1400px] mx-auto px-8">
         {/* Header */}
+        <BlueprintReveal delay={0}>
         <div className="flex items-end justify-between mb-16">
           <div>
             <span className="mono-label text-foreground/30 block mb-3">§ 04 — MODULAR SYSTEM PANELS</span>
@@ -680,26 +713,23 @@ export function FeaturesSection() {
           </div>
         </div>
         <div className="hairline mb-12" />
+        </BlueprintReveal>
 
         {/* Asymmetric mosaic grid */}
-        <div className="grid grid-cols-4 gap-4 auto-rows-[180px]">
+        <StaggerContainer className="grid grid-cols-4 gap-4 auto-rows-[180px]" delay={0.1} stagger={0.08}>
           {FEATURES.map((f, i) => (
-            <FeaturePanel key={f.id} feature={f} index={i} />
+            <StaggerItem key={f.id}><FeaturePanel feature={f} index={i} /></StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   )
 }
 
-function FeaturePanel({ feature, index }) {
-  const verticalOffsets = [0, 16, -8, 24, 0, -16, 12, -4]
-  const offset = verticalOffsets[index % verticalOffsets.length]
-
+function FeaturePanel({ feature }) {
   return (
     <div
-      className={`relative sys-node corner-marks rounded-sm p-5 group flex flex-col justify-between ${sizeClasses[feature.size]}`}
-      style={{ marginTop: offset }}
+      className={`relative sys-node corner-marks rounded-sm p-5 group flex flex-col justify-between bg-white/80 ${sizeClasses[feature.size]}`}
     >
       {/* Top row */}
       <div className="flex items-start justify-between">
@@ -730,7 +760,7 @@ function FeaturePanel({ feature, index }) {
 
 function WorkflowDiagnostics() {
   return (
-    <div className="sys-node corner-marks p-6 h-full flex flex-col bg-card/40 border-border/10">
+    <div className="sys-node corner-marks p-6 h-full flex flex-col bg-white/80 border-border/10">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <span className="mono-label text-primary flex items-center gap-2">

@@ -332,7 +332,7 @@ const WORKFLOW_NODES = [
       </svg>
     ),
     coord: "[X:01 / Y:01]",
-    meta: "FORMAT: .PNG",
+    meta: "FORMAT: .PNG, .JPG, .PDF",
     col: 1, row: 1,
   },
   {
@@ -512,10 +512,6 @@ export function EditorPreviewSection() {
       <div className="absolute left-0 right-0 pointer-events-none"
         style={{ height: 1, background: "linear-gradient(90deg, transparent 0%, rgba(57,255,20,0.25) 50%, transparent 100%)", animation: "scanPulse 6s ease-in-out infinite" }}
       />
-
-      {/* Corner labels */}
-      <span className="absolute top-8 left-8 coord-label" style={{ color: "rgba(57,255,20,0.3)" }}>[FLOWGEN EDITOR]</span>
-      <span className="absolute top-8 right-8 coord-label" style={{ color: "rgba(57,255,20,0.3)" }}>[WORKSPACE v1.0]</span>
 
       <div className="relative max-w-[1400px] mx-auto px-4 md:px-8">
         {/* Section heading */}

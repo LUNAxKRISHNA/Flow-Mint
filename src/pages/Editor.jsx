@@ -27,6 +27,7 @@ export default function Editor() {
   // ── CSV & Mapping state ─────────────────────────────────────────────
   const [csvData, setCsvData] = useState({ headers: [], rows: [], fileName: null })
   const [mappings, setMappings] = useState({}) // { placeholderId: csvHeaderName }
+  const [filenameHeader, setFilenameHeader] = useState(null)
 
   // ── Bulk generation state ────────────────────────────────────────────
   const [exportFormat, setExportFormat] = useState("pdf") // "pdf" | "png"
@@ -140,6 +141,7 @@ export default function Editor() {
         templateImage,
         canvasSize: canvasSizeRef.current,
         exportFormat,
+        filenameHeader,
         onProgress: (current, total) => {
           const isZipping = current === total
           setGenProgress((prev) => ({ ...prev, current, isZipping, isDone: false }))
@@ -150,7 +152,7 @@ export default function Editor() {
       console.error("Bulk generation failed:", err)
       setGenProgress((prev) => ({ ...prev, isOpen: false }))
     }
-  }, [csvData, placeholders, mappings, templateImage, exportFormat])
+  }, [csvData, placeholders, mappings, templateImage, exportFormat, filenameHeader])
 
   return (
     <div className="h-screen w-screen flex flex-col bg-background font-['Space_Grotesk']">
@@ -266,8 +268,10 @@ export default function Editor() {
         placeholders={placeholders}
         csvData={csvData}
         mappings={mappings}
+        filenameHeader={filenameHeader}
         onCsvData={handleCsvData}
         onUpdateMapping={handleUpdateMapping}
+        onUpdateFilenameHeader={setFilenameHeader}
       />
 
       {/* Bulk Generation Progress */}

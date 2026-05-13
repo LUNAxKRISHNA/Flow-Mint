@@ -1,9 +1,11 @@
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 
 export default function Navbar() {
   const navigate = useNavigate()
   const { scrollY } = useScroll()
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   // Navbar subtle background opacity based on scroll
   const bgOpacity = useTransform(scrollY, [0, 100], [0, 1])
@@ -11,6 +13,7 @@ export default function Navbar() {
 
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+    setMobileMenuOpen(false)
   }
 
   return (
@@ -41,21 +44,26 @@ export default function Navbar() {
           <span className="w-1 h-[1px] bg-[#1a1a1a]" />
         </div>
 
-        {/* LEFT SIDE: Workspace, Templates */}
-        <div className="flex items-center gap-10 w-1/3 pl-4">
+        {/* LEFT SIDE: Workspace, Templates (Desktop) */}
+        <div className="hidden md:flex items-center gap-10 w-1/3 pl-4">
           <button
             onClick={() => navigate("/setup")}
             className="group flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity"
           >
             <span className="text-[9px] font-mono tracking-widest text-[#1a1a1a]/50 group-hover:text-[#39FF14] transition-colors">01</span>
-            <span className="text-[11px] font-medium tracking-[0.15em] text-[#1a1a1a] uppercase">Workspace</span>
+            <span className="text-[11px] font-medium tracking-[0.15em] text-[#1a1a1a] uppercase">FlowGen</span>
           </button>
+        </div>
+
+        {/* LEFT SIDE: Hamburger Menu (Mobile) */}
+        <div className="flex md:hidden items-center w-1/3 pl-2">
           <button
-            onClick={() => scrollTo("templates")}
-            className="group flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity"
+            onClick={() => setMobileMenuOpen(true)}
+            className="w-10 h-10 flex flex-col items-center justify-center gap-[4px] group"
           >
-            <span className="text-[9px] font-mono tracking-widest text-[#1a1a1a]/50 group-hover:text-[#39FF14] transition-colors">02</span>
-            <span className="text-[11px] font-medium tracking-[0.15em] text-[#1a1a1a] uppercase">Templates</span>
+            <span className="w-5 h-[1px] bg-[#1a1a1a] group-hover:bg-[#39FF14] transition-colors" />
+            <span className="w-5 h-[1px] bg-[#1a1a1a] group-hover:bg-[#39FF14] transition-colors" />
+            <span className="w-5 h-[1px] bg-[#1a1a1a] group-hover:bg-[#39FF14] transition-colors" />
           </button>
         </div>
 
@@ -77,33 +85,17 @@ export default function Navbar() {
         </div>
 
 
-        {/* RIGHT SIDE: Generate, Docs, Icon */}
-        <div className="flex items-center justify-end gap-10 w-1/3 pr-4">
+        {/* RIGHT SIDE: Docs (Desktop) */}
+        <div className="hidden md:flex items-center justify-end gap-10 w-1/3 pr-4">
           <button
-            className="text-[11px] font-medium tracking-[0.15em] text-[#1a1a1a]/50 hover:text-[#1a1a1a] transition-all duration-300 uppercase relative overflow-hidden group"
-          >
-            Generate
-            <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#39FF14] -translate-x-[105%] group-hover:translate-x-0 transition-transform duration-300 ease-out" />
-          </button>
-          <button
+            onClick={() => navigate("/docs")}
             className="text-[11px] font-medium tracking-[0.15em] text-[#1a1a1a]/50 hover:text-[#1a1a1a] transition-all duration-300 uppercase relative overflow-hidden group"
           >
             Docs
             <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#39FF14] -translate-x-[105%] group-hover:translate-x-0 transition-transform duration-300 ease-out" />
           </button>
-
-          {/* Tiny outlined square control icon with neon green plus */}
-          <button className="relative w-7 h-7 border border-[#1a1a1a]/15 flex items-center justify-center hover:border-[#39FF14]/60 hover:bg-[#39FF14]/5 transition-all duration-300 group ml-2">
-            {/* Neon green plus */}
-            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className="transform group-hover:scale-110 transition-transform duration-300">
-              <path d="M5 1v8M1 5h8" stroke="#39FF14" strokeWidth="1" strokeLinecap="square" />
-            </svg>
-            {/* Micro hover glow */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#39FF14]/10 blur-[4px] pointer-events-none" />
-            {/* Tiny coordinate marker */}
-            <span className="absolute -top-3 -right-4 text-[6px] font-mono text-[#39FF14]/0 group-hover:text-[#39FF14]/60 transition-colors duration-300">ACT.01</span>
-          </button>
         </div>
+
 
         {/* Tiny technical markers embedded into navbar edges (Right) */}
         <div className="absolute right-0 top-0 bottom-0 w-6 flex flex-col justify-between py-2 items-center opacity-30 pointer-events-none">
@@ -113,6 +105,47 @@ export default function Navbar() {
         </div>
 
       </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute top-16 left-0 w-full bg-[#f5f5f3]/95 backdrop-blur-md border-b border-[#1a1a1a]/10 pointer-events-auto md:hidden"
+          >
+            <div className="flex flex-col px-6 py-8 gap-6">
+              <button
+                onClick={() => { navigate("/setup"); setMobileMenuOpen(false); }}
+                className="flex items-center justify-between py-2 border-b border-[#1a1a1a]/5"
+              >
+                <span className="text-[14px] font-medium tracking-[0.15em] text-[#1a1a1a] uppercase">FlowGen</span>
+                <span className="text-[9px] font-mono text-[#1a1a1a]/40">01</span>
+              </button>
+              <button
+                onClick={() => { navigate("/docs"); setMobileMenuOpen(false); }}
+                className="flex items-center justify-between py-2 border-b border-[#1a1a1a]/5"
+              >
+                <span className="text-[14px] font-medium tracking-[0.15em] text-[#1a1a1a] uppercase">Docs</span>
+                <span className="text-[9px] font-mono text-[#1a1a1a]/40">02</span>
+              </button>
+            </div>
+            {/* Close button in mobile menu */}
+            <div className="absolute top-[-3rem] left-0 w-full h-16 flex items-center justify-start px-8 pointer-events-none">
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                className="pointer-events-auto w-10 h-10 flex flex-col items-center justify-center gap-[4px]"
+              >
+                {/* X icon */}
+                <span className="w-5 h-[1px] bg-[#1a1a1a] rotate-45 translate-y-[2.5px]" />
+                <span className="w-5 h-[1px] bg-[#1a1a1a] -rotate-45 -translate-y-[2.5px]" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   )
 }

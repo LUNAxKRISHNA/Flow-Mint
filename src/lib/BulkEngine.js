@@ -25,12 +25,18 @@ async function captureElement(el) {
  * @param {string} ext
  * @returns {string}
  */
-function rowFilename(row, index, ext) {
-  const firstVal = Object.values(row)[0]
-  const slug = firstVal
-    ? String(firstVal).replace(/[^a-z0-9]/gi, "_").slice(0, 32)
+function rowFilename(row, index, ext, filenameHeader) {
+  const val = filenameHeader ? row[filenameHeader] : Object.values(row)[0]
+  
+  // Create a safe slug: alphanumeric, underscores, hyphens
+  const slug = val
+    ? String(val).replace(/[^a-z0-9\-_]/gi, "_").trim()
     : `record_${String(index + 1).padStart(3, "0")}`
-  return `${slug}_${String(index + 1).padStart(3, "0")}.${ext}`
+
+  // Ensure it's not empty after cleaning and not too long
+  const finalSlug = slug.slice(0, 64) || `record_${String(index + 1).padStart(3, "0")}`
+  
+  return `${finalSlug}.${ext}`
 }
 
 /**
@@ -52,6 +58,7 @@ export async function runBulkGeneration({
   templateImage,
   canvasSize,
   exportFormat,
+  filenameHeader,
   onProgress,
 }) {
   const zip = new JSZip()
@@ -141,10 +148,10 @@ export async function runBulkGeneration({
         })
         pdf.addImage(imgData, "JPEG", 0, 0, pxToPt(canvasSize.w), pxToPt(canvasSize.h))
         const pdfBlob = pdf.output("blob")
-        zip.file(rowFilename(row, i, "pdf"), pdfBlob)
+        zip.file(rowFilename(row, i, "pdf", filenameHeader), pdfBlob)
       } else {
         const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"))
-        zip.file(rowFilename(row, i, "png"), blob)
+        zip.file(rowFilename(row, i, "png", filenameHeader), blob)
       }
 
       onProgress(i + 1, total)

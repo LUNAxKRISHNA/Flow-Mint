@@ -3,6 +3,7 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { FONT_LIST } from "@/constants/fonts"
 
 export default function PropertiesPanel({ placeholder, onPropertyChange, onDelete }) {
   if (!placeholder) {
@@ -83,13 +84,17 @@ export default function PropertiesPanel({ placeholder, onPropertyChange, onDelet
               <select
                 value={placeholder.fontFamily}
                 onChange={(e) => change("fontFamily", e.target.value)}
-                className="flex h-8 w-full border border-input bg-background px-3 py-1 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                className="flex h-8 w-full border border-input bg-background px-3 py-1 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring font-mono"
               >
-                <option>Inter</option>
-                <option>Space Grotesk</option>
-                <option>Roboto</option>
-                <option>Playfair Display</option>
-                <option>Lora</option>
+                {Array.from(new Set(FONT_LIST.map(f => f.category))).map(cat => (
+                  <optgroup key={cat} label={cat.toUpperCase()} className="text-[10px] tracking-widest bg-muted/50">
+                    {FONT_LIST.filter(f => f.category === cat).map(font => (
+                      <option key={font.name} value={font.name} style={{ fontFamily: font.name }}>
+                        {font.name}
+                      </option>
+                    ))}
+                  </optgroup>
+                ))}
               </select>
             </div>
 

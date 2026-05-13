@@ -39,7 +39,7 @@ export function SplashSection() {
       </div>
 
       {/* Enter Workspace Link */}
-      <div className="absolute bottom-20 right-12 z-20">
+      <div className="absolute bottom-24 md:bottom-20 right-6 md:right-12 z-20">
         <button
           onClick={() => navigate("/setup")}
           className="group flex flex-col items-end gap-1"
@@ -69,7 +69,7 @@ export function SplashSection() {
           <div className="absolute inset-x-[-20%] h-[2px] bg-primary/30 blur-[2px] z-20 pointer-events-none animate-[scanPulse_4s_ease-in-out_infinite]" />
 
           {/* Background blurred outline text effect based on the reference */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[8rem] md:text-[14rem] font-bold text-transparent opacity-[0.03] pointer-events-none select-none tracking-tighter"
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[5rem] md:text-[14rem] font-bold text-transparent opacity-[0.03] pointer-events-none select-none tracking-tighter"
             style={{ WebkitTextStroke: "2px var(--foreground)" }}>
             FlowMint
           </div>
@@ -141,7 +141,7 @@ export function HeroSection() {
       <span className="absolute bottom-8 left-6 coord-label" style={{ color: "rgba(57,255,20,0.3)" }}>.-.. ..- -. .-</span>
       <span className="absolute bottom-8 right-6 coord-label" style={{ color: "rgba(57,255,20,0.3)" }}>LATENCY: &lt;2ms</span>
 
-      <div className="w-full max-w-[1400px] mx-auto px-8 pt-28 pb-16 grid grid-cols-1 lg:grid-cols-[1fr_1px_1fr] gap-0 items-center">
+      <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8 pt-24 pb-12 md:pt-28 md:pb-16 grid grid-cols-1 lg:grid-cols-[1fr_1px_1fr] gap-0 items-center">
 
         {/* ── Left: Editorial Typography ─────────────────────────── */}
         <div className="pr-0 lg:pr-16 py-8">
@@ -149,7 +149,7 @@ export function HeroSection() {
           <div className="mb-8">
             <div className="overflow-hidden">
               <motion.h1
-                className="editorial-heading text-[72px] md:text-[96px] lg:text-[108px] text-white leading-none"
+                className="editorial-heading text-[52px] md:text-[96px] lg:text-[108px] text-white leading-none"
                 initial={{ y: "110%", opacity: 0 }}
                 animate={{ y: "0%", opacity: 1 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
@@ -159,7 +159,7 @@ export function HeroSection() {
             </div>
             <div className="overflow-hidden pl-8 md:pl-16">
               <motion.h1
-                className="editorial-heading text-[72px] md:text-[96px] lg:text-[108px] text-white leading-none"
+                className="editorial-heading text-[52px] md:text-[96px] lg:text-[108px] text-white leading-none"
                 initial={{ y: "110%", opacity: 0 }}
                 animate={{ y: "0%", opacity: 1 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
@@ -169,7 +169,7 @@ export function HeroSection() {
             </div>
             <div className="overflow-hidden">
               <motion.h1
-                className="editorial-heading text-[72px] md:text-[96px] lg:text-[108px] text-foreground/20 leading-none"
+                className="editorial-heading text-[52px] md:text-[96px] lg:text-[108px] text-foreground/20 leading-none"
                 initial={{ y: "110%", opacity: 0 }}
                 animate={{ y: "0%", opacity: 1 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.34 }}
@@ -227,14 +227,14 @@ export function HeroSection() {
 
 function HeroVisualization() {
   return (
-    <div className="relative w-full max-w-[480px] h-[520px]">
+    <div className="relative w-full max-w-[480px] min-h-[400px] md:h-[520px] flex flex-col md:block items-center gap-6 py-8 md:py-0">
 
-      {/* Background grid panel */}
-      <div className="absolute inset-0 system-grid-dark rounded-sm border border-white/5" />
+      {/* Background grid panel (Desktop only or adjusted for mobile) */}
+      <div className="absolute inset-0 system-grid-dark rounded-sm border border-white/5 hidden md:block" />
 
       {/* Node: Template */}
-      <div className="absolute top-12 left-0 animate-node-float" style={{ animationDelay: "0s" }}>
-        <div className="sys-node corner-marks rounded-sm px-4 py-3 w-52 bg-zinc-900/60 border-white/5 backdrop-blur-xl hover:border-primary/30 transition-all">
+      <div className="relative md:absolute md:top-12 md:left-0 animate-node-float w-full max-w-[260px] md:max-w-none md:w-auto" style={{ animationDelay: "0s" }}>
+        <div className="sys-node corner-marks rounded-sm px-4 py-3 w-full md:w-52 bg-zinc-900/60 border-white/5 backdrop-blur-xl hover:border-primary/30 transition-all">
           <div className="flex items-center gap-2 mb-2">
             <div className="w-2 h-2 bg-primary rounded-full" />
             <span className="mono-label text-white/40">TEMPLATE</span>
@@ -250,8 +250,8 @@ function HeroVisualization() {
       </div>
 
       {/* Node: Data Source */}
-      <div className="absolute top-4 right-0 animate-node-float-alt" style={{ animationDelay: "0.5s" }}>
-        <div className="sys-node corner-marks rounded-sm px-4 py-3 w-44 bg-zinc-900/60 border-white/5 backdrop-blur-xl hover:border-primary/30 transition-all">
+      <div className="relative md:absolute md:top-4 md:right-0 animate-node-float-alt w-full max-w-[260px] md:max-w-none md:w-auto" style={{ animationDelay: "0.5s" }}>
+        <div className="sys-node corner-marks rounded-sm px-4 py-3 w-full md:w-44 bg-zinc-900/60 border-white/5 backdrop-blur-xl hover:border-primary/30 transition-all">
           <div className="flex items-center gap-2 mb-2">
             <div className="w-2 h-2 bg-blue-400 rounded-full" />
             <span className="mono-label text-white/40">DATA</span>
@@ -270,8 +270,8 @@ function HeroVisualization() {
       </div>
 
       {/* Node: Mapping Engine */}
-      <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 animate-node-float" style={{ animationDelay: "1s" }}>
-        <div className="sys-node corner-marks rounded-sm px-5 py-4 w-48 text-center bg-zinc-900/60 border-primary/20 backdrop-blur-xl hover:border-primary/50 transition-all" style={{ borderColor: "rgba(57,255,20,0.3)" }}>
+      <div className="relative md:absolute md:top-1/2 md:-translate-y-1/2 md:left-1/2 md:-translate-x-1/2 animate-node-float w-full max-w-[260px] md:max-w-none md:w-auto" style={{ animationDelay: "1s" }}>
+        <div className="sys-node corner-marks rounded-sm px-5 py-4 w-full md:w-48 text-center bg-zinc-900/60 border-primary/20 backdrop-blur-xl hover:border-primary/50 transition-all" style={{ borderColor: "rgba(57,255,20,0.3)" }}>
           <div className="flex items-center justify-center gap-2 mb-2">
             <span className="status-pulse" />
             <span className="mono-label text-primary/70">MAPPING ENGINE</span>
@@ -285,8 +285,8 @@ function HeroVisualization() {
       </div>
 
       {/* Node: Output */}
-      <div className="absolute bottom-9 right-[-30px] animate-node-float-alt" style={{ animationDelay: "0.8s" }}>
-        <div className="sys-node corner-marks rounded-sm px-4 py-3 w-44 bg-zinc-900/60 border-white/5 backdrop-blur-xl hover:border-primary/30 transition-all">
+      <div className="relative md:absolute md:bottom-9 md:right-[-30px] animate-node-float-alt w-full max-w-[260px] md:max-w-none md:w-auto" style={{ animationDelay: "0.8s" }}>
+        <div className="sys-node corner-marks rounded-sm px-4 py-3 w-full md:w-44 bg-zinc-900/60 border-white/5 backdrop-blur-xl hover:border-primary/30 transition-all">
           <div className="flex items-center gap-2 mb-2">
             <div className="w-2 h-2 bg-orange-400 rounded-full" />
             <span className="mono-label text-white/40">OUTPUT</span>
@@ -302,15 +302,15 @@ function HeroVisualization() {
       </div>
 
       {/* Node: Status indicator bottom left */}
-      <div className="absolute bottom-10 left-0 animate-node-float" style={{ animationDelay: "1.5s" }}>
-        <div className="sys-node rounded-sm px-3 py-2 text-xs bg-zinc-900/60 border-white/5 backdrop-blur-xl hover:border-primary/30 transition-all">
+      <div className="relative md:absolute md:bottom-10 md:left-0 animate-node-float w-full max-w-[260px] md:max-w-none md:w-auto" style={{ animationDelay: "1.5s" }}>
+        <div className="sys-node rounded-sm px-3 py-2 text-xs bg-zinc-900/60 border-white/5 backdrop-blur-xl hover:border-primary/30 transition-all flex items-center justify-center md:justify-start">
           <span className="mono-label text-white/40">QUEUE:</span>
           <span className="text-white/70 ml-2">148 jobs done</span>
         </div>
       </div>
 
-      {/* SVG Connection lines */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 480 520" fill="none">
+      {/* SVG Connection lines (Desktop only) */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none hidden md:block" viewBox="0 0 480 520" fill="none">
         {/* Template → Engine */}
         <path d="M 200 90 Q 240 90 240 240" stroke="rgba(57,255,20,0.35)" strokeWidth="1" className="flow-path" />
         {/* Data → Engine */}
@@ -399,14 +399,14 @@ const WORKFLOW_NODES = [
 
 export function WorkflowSection() {
   return (
-    <section id="workflow" className="relative py-32 overflow-hidden">
+    <section id="workflow" className="relative py-16 md:py-32 overflow-hidden">
       {/* Subtle background */}
       <div className="absolute inset-0 system-grid-fine" />
       <div className="absolute top-0 left-0 right-0 hairline" />
       <div className="absolute bottom-0 left-0 right-0 hairline" />
 
       {/* Top label */}
-      <BlueprintReveal className="relative max-w-[1400px] mx-auto px-8 mb-16" delay={0}>
+      <BlueprintReveal className="relative max-w-[1400px] mx-auto px-4 md:px-8 mb-16" delay={0}>
         <div className="flex items-end justify-between">
           <div>
             <span className="mono-label text-foreground/30 block mb-3">§ 02 — WORKFLOW ARCHITECTURE</span>
@@ -423,23 +423,23 @@ export function WorkflowSection() {
       </BlueprintReveal>
 
       {/* Pipeline grid */}
-      <div className="relative max-w-[1400px] mx-auto px-8">
+      <div className="relative max-w-[1400px] mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 xl:grid-cols-[auto_1px_380px] gap-12 items-stretch">
 
           {/* Left: Workflow Grid */}
           <div className="relative max-w-3xl">
-            <StaggerContainer className="grid grid-cols-2 gap-6 md:gap-10 relative z-10" delay={0.15} stagger={0.12}>
+            <StaggerContainer className="flex overflow-x-auto snap-x snap-mandatory gap-6 md:grid md:grid-cols-2 md:gap-10 relative z-10 pb-8 md:pb-0 hide-scrollbar" delay={0.15} stagger={0.12}>
               {/* Row 1 */}
-              <StaggerItem><WorkflowNode node={WORKFLOW_NODES[0]} delay="0s" /></StaggerItem>
-              <StaggerItem><WorkflowNode node={WORKFLOW_NODES[1]} delay="0s" /></StaggerItem>
+              <StaggerItem className="snap-center min-w-[85vw] sm:min-w-[320px] md:min-w-0"><WorkflowNode node={WORKFLOW_NODES[0]} delay="0s" /></StaggerItem>
+              <StaggerItem className="snap-center min-w-[85vw] sm:min-w-[320px] md:min-w-0"><WorkflowNode node={WORKFLOW_NODES[1]} delay="0s" /></StaggerItem>
               {/* Row 2 — reversed for flow effect */}
-              <StaggerItem><WorkflowNode node={WORKFLOW_NODES[3]} delay="0s" /></StaggerItem>
-              <StaggerItem><WorkflowNode node={WORKFLOW_NODES[2]} delay="0s" /></StaggerItem>
+              <StaggerItem className="snap-center min-w-[85vw] sm:min-w-[320px] md:min-w-0"><WorkflowNode node={WORKFLOW_NODES[3]} delay="0s" /></StaggerItem>
+              <StaggerItem className="snap-center min-w-[85vw] sm:min-w-[320px] md:min-w-0"><WorkflowNode node={WORKFLOW_NODES[2]} delay="0s" /></StaggerItem>
             </StaggerContainer>
 
             {/* SVG Flow Paths (layered over grid) */}
             <svg
-              className="absolute inset-0 pointer-events-none w-full h-full"
+              className="absolute inset-0 pointer-events-none w-full h-full hidden md:block"
               viewBox="0 0 720 440"
               fill="none"
             >
@@ -513,7 +513,7 @@ function WorkflowNode({ node, delay }) {
 // --- EditorPreviewSection.jsx ---
 export function EditorPreviewSection() {
   return (
-    <section id="editor-preview" className="relative py-32 overflow-hidden bg-foreground">
+    <section id="editor-preview" className="relative py-16 md:py-32 overflow-hidden bg-foreground">
       {/* Dark grid background */}
       <div className="absolute inset-0 system-grid-dark" />
       {/* Glow blob */}
@@ -532,7 +532,7 @@ export function EditorPreviewSection() {
       <span className="absolute top-8 left-8 coord-label" style={{ color: "rgba(57,255,20,0.3)" }}>[§ 03 — EDITOR]</span>
       <span className="absolute top-8 right-8 coord-label" style={{ color: "rgba(57,255,20,0.3)" }}>[WORKSPACE v2.1]</span>
 
-      <div className="relative max-w-[1400px] mx-auto px-8">
+      <div className="relative max-w-[1400px] mx-auto px-4 md:px-8">
         {/* Section heading */}
         <BlueprintReveal className="mb-14" delay={0}>
           <h2 className="editorial-heading text-[52px] md:text-[72px] leading-none text-white">
@@ -568,7 +568,7 @@ export function EditorPreviewSection() {
           <div className="flex" style={{ minHeight: 420 }}>
 
             {/* Left: Layer panel */}
-            <div className="w-48 border-r flex-shrink-0 px-4 py-4" style={{ borderColor: "rgba(57,255,20,0.08)", background: "rgba(0,0,0,0.2)" }}>
+            <div className="hidden lg:block w-48 border-r flex-shrink-0 px-4 py-4" style={{ borderColor: "rgba(57,255,20,0.08)", background: "rgba(0,0,0,0.2)" }}>
               <span className="mono-label block mb-4" style={{ color: "rgba(255,255,255,0.25)" }}>LAYERS</span>
               {[
                 { label: "{{name}}", active: true },
@@ -632,7 +632,7 @@ export function EditorPreviewSection() {
             </div>
 
             {/* Right: Properties panel */}
-            <div className="w-52 border-l flex-shrink-0 px-4 py-4" style={{ borderColor: "rgba(57,255,20,0.08)", background: "rgba(0,0,0,0.2)" }}>
+            <div className="hidden lg:block w-52 border-l flex-shrink-0 px-4 py-4" style={{ borderColor: "rgba(57,255,20,0.08)", background: "rgba(0,0,0,0.2)" }}>
               <span className="mono-label block mb-4" style={{ color: "rgba(255,255,255,0.25)" }}>INSPECTOR</span>
               {[
                 ["Variable", "{{name}}"],
@@ -674,89 +674,6 @@ export function EditorPreviewSection() {
   )
 }
 
-// --- FeaturesSection.jsx ---
-const FEATURES = [
-  { id: "mapping", label: "01", title: "Dynamic Placeholder Mapping", desc: "Insert {{variables}} with pixel precision into any document zone.", meta: "CORE ENGINE", size: "large" },
-  { id: "spreadsheet", label: "02", title: "Spreadsheet Integration", desc: "Bind CSV or XLSX columns directly to template variables.", meta: "DATA LAYER", size: "medium" },
-  { id: "bulk", label: "03", title: "Bulk Document Generation", desc: "Render multiple personalized outputs in a single job.", meta: "RENDER CORE", size: "large" },
-  { id: "detection", label: "04", title: "Smart Variable Detection", desc: "Auto-detect and validate all {{tokens}} in your template.", meta: "AI ASSIST", size: "small" },
-  { id: "preview", label: "05", title: "Real-time Preview", desc: "See live document changes as you map and configure.", meta: "LIVE UI", size: "small" },
-  { id: "automation", label: "06", title: "Workflow Automation", desc: "Schedule, trigger, and chain generation pipelines.", meta: "PIPELINE", size: "medium" },
-]
-
-const sizeClasses = {
-  large: "col-span-2",
-  medium: "col-span-1",
-  small: "col-span-1",
-}
-
-export function FeaturesSection() {
-  return (
-    <section id="features" className="relative py-32 overflow-hidden">
-      <div className="absolute inset-0 system-grid-fine" />
-      <div className="absolute top-0 left-0 right-0 hairline" />
-
-      <div className="relative max-w-[1400px] mx-auto px-8">
-        {/* Header */}
-        <BlueprintReveal delay={0}>
-        <div className="flex items-end justify-between mb-16">
-          <div>
-            <span className="mono-label text-foreground/30 block mb-3">§ 04 — MODULAR SYSTEM PANELS</span>
-            <h2 className="editorial-heading text-[52px] md:text-[72px] leading-none text-foreground">
-              SYSTEM<br />
-              <span style={{ color: "#39FF14" }}>MODULES.</span>
-            </h2>
-          </div>
-          <div className="hidden md:block text-right">
-            <span className="mono-label text-foreground/25 block">8 CORE MODULES</span>
-            <span className="mono-label text-foreground/25 block mt-1">ALL SYSTEMS NOMINAL</span>
-          </div>
-        </div>
-        <div className="hairline mb-12" />
-        </BlueprintReveal>
-
-        {/* Asymmetric mosaic grid */}
-        <StaggerContainer className="grid grid-cols-4 gap-4 auto-rows-[180px]" delay={0.1} stagger={0.08}>
-          {FEATURES.map((f, i) => (
-            <StaggerItem key={f.id}><FeaturePanel feature={f} index={i} /></StaggerItem>
-          ))}
-        </StaggerContainer>
-      </div>
-    </section>
-  )
-}
-
-function FeaturePanel({ feature }) {
-  return (
-    <div
-      className={`relative sys-node corner-marks rounded-sm p-5 group flex flex-col justify-between bg-white/80 ${sizeClasses[feature.size]}`}
-    >
-      {/* Top row */}
-      <div className="flex items-start justify-between">
-        <span className="mono-label text-primary/50 group-hover:text-primary transition-colors">{feature.label}</span>
-        <span className="coord-label">{feature.meta}</span>
-      </div>
-
-      {/* Content */}
-      <div>
-        <h3 className="text-base font-bold text-foreground mb-2 leading-snug">{feature.title}</h3>
-        <p className="text-xs text-foreground/45 leading-relaxed">{feature.desc}</p>
-      </div>
-
-      {/* Status dot */}
-      <div className="flex items-center gap-1.5">
-        <div className="w-1.5 h-1.5 rounded-full bg-primary/50 group-hover:bg-primary transition-colors" />
-        <span className="mono-label text-foreground/30">ONLINE</span>
-      </div>
-
-      {/* Hover radial glow */}
-      <div
-        className="absolute inset-0 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-        style={{ background: "radial-gradient(circle at 10% 90%, rgba(57,255,20,0.05) 0%, transparent 60%)" }}
-      />
-    </div>
-  )
-}
 
 function WorkflowDiagnostics() {
   return (

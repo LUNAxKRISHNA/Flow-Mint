@@ -3,8 +3,7 @@ import {
   SplashSection,
   HeroSection,
   WorkflowSection,
-  EditorPreviewSection,
-  FeaturesSection
+  EditorPreviewSection
 } from "@/components/landing/Landing"
 
 export default function Home() {
@@ -16,7 +15,6 @@ export default function Home() {
         <HeroSection />
         <WorkflowSection />
         <EditorPreviewSection />
-        <FeaturesSection />
       </div>
     </div>
   )

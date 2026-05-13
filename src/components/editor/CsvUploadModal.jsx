@@ -10,8 +10,10 @@ export default function CsvUploadModal({
   placeholders, 
   csvData, 
   mappings, 
+  filenameHeader,
   onCsvData, 
-  onUpdateMapping 
+  onUpdateMapping,
+  onUpdateFilenameHeader
 }) {
   const [activeTab, setActiveTab] = useState("upload")
   const [isParsing, setIsParsing] = useState(false)
@@ -159,6 +161,29 @@ export default function CsvUploadModal({
                     {mappedCount} / {placeholders.length} Synchronized
                   </span>
                 </div>
+              </div>
+
+              {/* Filename Source Selection */}
+              <div className="p-4 border border-primary/20 rounded bg-primary/5 flex items-center justify-between gap-4 animate-fade-up">
+                <div className="flex items-center gap-3">
+                  <div className="h-8 w-8 rounded bg-primary/10 flex items-center justify-center">
+                    <CheckCircle2 className="h-4 w-4 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="text-[11px] font-bold tracking-tight uppercase">Filename Source</h4>
+                    <p className="text-[9px] font-mono text-primary/60 uppercase tracking-widest">Identify records by this field</p>
+                  </div>
+                </div>
+                <select 
+                  value={filenameHeader || ""}
+                  onChange={(e) => onUpdateFilenameHeader(e.target.value)}
+                  className="h-8 min-w-[160px] rounded border border-primary/30 bg-card px-2 text-[10px] font-mono tracking-tight focus:outline-none focus:ring-1 focus:ring-primary/40 text-foreground"
+                >
+                  <option value="">-- AUTO-INDEX --</option>
+                  {csvData.headers.map(header => (
+                    <option key={header} value={header}>{header}</option>
+                  ))}
+                </select>
               </div>
               
               <div className="border border-border/20 rounded overflow-hidden bg-muted/5 shadow-sm">

@@ -2,7 +2,6 @@ import React from "react"
 import { motion } from "framer-motion"
 import { useNavigate } from "react-router-dom"
 import { ArrowLeft, Database, FileText, Zap, Layout, ArrowRight } from "lucide-react"
-import Navbar from "../components/layout/Navbar"
 
 const Section = ({ title, icon: Icon, children, delay = 0 }) => (
   <motion.div
@@ -32,7 +31,6 @@ export default function Docs() {
 
   return (
     <div className="min-h-screen bg-[#f5f5f3] font-['Space_Grotesk'] text-[#1a1a1a] selection:bg-[#39FF14]/30">
-      <Navbar />
 
       {/* Background System Grid */}
       <div className="fixed inset-0 system-grid opacity-[0.03] pointer-events-none" />

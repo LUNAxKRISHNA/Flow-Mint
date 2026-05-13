@@ -35,6 +35,10 @@ export default function Editor() {
   const [genProgress, setGenProgress] = useState({ isOpen: false, current: 0, total: 0, isZipping: false, isDone: false })
 
   const canvasSizeRef = useRef({ w: 794, h: 1123 })
+  const [zoom, setZoom] = useState(1)
+
+  const handleZoomIn = useCallback(() => setZoom(prev => Math.min(prev + 0.1, 2)), [])
+  const handleZoomOut = useCallback(() => setZoom(prev => Math.max(prev - 0.1, 0.5)), [])
 
   const selectedPlaceholder = placeholders.find((p) => p.id === selectedId) ?? null
 
@@ -155,7 +159,7 @@ export default function Editor() {
   }, [csvData, placeholders, mappings, templateImage, exportFormat, filenameHeader])
 
   return (
-    <div className="h-screen w-screen flex flex-col bg-background font-['Space_Grotesk']">
+    <div className="h-screen w-screen flex flex-col bg-background font-['Space_Grotesk'] pt-16">
       {/* Top Header */}
       <header className="h-14 border-b border-border flex items-center justify-between px-4 bg-card/50 z-50 relative">
         <div className="flex items-center gap-3">
@@ -237,6 +241,8 @@ export default function Editor() {
         <Toolbar
           onOpenCsvModal={() => setIsCsvModalOpen(true)}
           onAddPlaceholder={handleAddPlaceholder}
+          onZoomIn={handleZoomIn}
+          onZoomOut={handleZoomOut}
         />
 
         {/* Center Canvas */}
@@ -250,6 +256,7 @@ export default function Editor() {
             onResize={handleResize}
             onPropertyChange={handlePropertyChange}
             onCanvasSizeChange={handleCanvasSizeChange}
+            zoom={zoom}
           />
         </div>
 

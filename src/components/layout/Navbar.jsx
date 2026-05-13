@@ -43,7 +43,6 @@ export default function Navbar() {
           <span className="text-[7px] rotate-[-90deg] tracking-[0.2em] font-medium text-[#1a1a1a]">NAV</span>
           <span className="w-1 h-[1px] bg-[#1a1a1a]" />
         </div>
-
         {/* LEFT SIDE: Workspace, Templates (Desktop) */}
         <div className="hidden md:flex items-center gap-10 w-1/3 pl-4">
           <button
@@ -71,7 +70,13 @@ export default function Navbar() {
         <div className="flex justify-center w-1/3 group">
           <div
             className="relative flex items-center justify-center cursor-pointer"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            onClick={() => {
+              if (window.location.pathname === "/") {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              } else {
+                navigate("/");
+              }
+            }}
           >
             {/* Logo */}
             <div className="relative w-36 h-18 flex items-center justify-center">
@@ -103,7 +108,6 @@ export default function Navbar() {
           <span className="text-[7px] rotate-[90deg] tracking-[0.2em] font-medium text-[#1a1a1a]">NAV</span>
           <span className="w-1 h-[1px] bg-[#1a1a1a]" />
         </div>
-
       </div>
 
       {/* Mobile Menu Overlay */}

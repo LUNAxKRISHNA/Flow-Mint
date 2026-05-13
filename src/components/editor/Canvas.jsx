@@ -12,6 +12,7 @@ export default function Canvas({
   onResize,
   onPropertyChange,
   onCanvasSizeChange,
+  zoom = 1,
 }) {
   const [canvasSize, setCanvasSize] = useState({ w: 794, h: 1123 })
 
@@ -52,6 +53,9 @@ export default function Canvas({
           height: canvasSize.h,
           background: templateImage ? "transparent" : "#ffffff",
           border: "1px solid rgba(26,26,26,0.12)",
+          transform: `scale(${zoom})`,
+          transformOrigin: "top center",
+          transition: "transform 0.2s ease-out",
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -91,6 +95,7 @@ export default function Canvas({
             onResize={onResize}
             onPropertyChange={onPropertyChange}
             canvasSize={canvasSize}
+            zoom={zoom}
           />
         ))}
       </div>
@@ -108,6 +113,7 @@ function DraggablePlaceholder({
   onResize,
   onPropertyChange,
   canvasSize,
+  zoom,
 }) {
   const [isEditing, setIsEditing] = useState(false)
   const [editValue, setEditValue] = useState(ph.key)
@@ -156,8 +162,8 @@ function DraggablePlaceholder({
       const r = resizeState.current
       if (!r) return
 
-      const dx = ev.clientX - r.startX
-      const dy = ev.clientY - r.startY
+      const dx = (ev.clientX - r.startX) / zoom
+      const dy = (ev.clientY - r.startY) / zoom
 
       let newX = r.startPx
       let newY = r.startPy
@@ -221,8 +227,8 @@ function DraggablePlaceholder({
         initial={false}
         animate={{ x: ph.x, y: ph.y }}
         onDragEnd={(e, info) => {
-          const rawX = ph.x + info.offset.x
-          const rawY = ph.y + info.offset.y
+          const rawX = ph.x + info.offset.x / zoom
+          const rawY = ph.y + info.offset.y / zoom
           const newX = Math.max(0, Math.min(canvasSize.w - ph.width, rawX))
           const newY = Math.max(0, Math.min(canvasSize.h - ph.height, rawY))
           onPositionChange(ph.id, newX, newY)

@@ -182,24 +182,14 @@ export default function Onboarding() {
       <div className="absolute top-0 bottom-0 right-0 w-px bg-gradient-to-b from-transparent via-[#39FF14]/10 to-transparent" />
 
       {/* Corner coordinate markers */}
-      <span className="absolute top-6 left-8 font-mono text-[9px] tracking-widest text-[#39FF14]/30 uppercase">[FLOWMINT — SETUP.001]</span>
-      <span className="absolute top-6 right-8 font-mono text-[9px] tracking-widest text-[#39FF14]/30 uppercase">[BLUEPRINT INGESTION]</span>
+
       <span className="absolute bottom-6 left-8 font-mono text-[9px] tracking-widest text-foreground/20 uppercase">SYSTEM: NOMINAL</span>
       <span className="absolute bottom-6 right-8 font-mono text-[9px] tracking-widest text-foreground/20 uppercase">v2.1 — BETA</span>
 
       {/* Scan line (ambient) */}
       <div className="scan-line" />
 
-      {/* Back button */}
-      <button
-        onClick={() => navigate("/")}
-        className="absolute top-5 left-1/2 -translate-x-1/2 group flex items-center gap-2 opacity-40 hover:opacity-100 transition-opacity"
-      >
-        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-          <path d="M8 5H2M2 5L5 2M2 5l3 3" stroke="#1a1a1a" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-        <span className="text-[10px] font-mono tracking-[0.2em] text-foreground/60 uppercase group-hover:text-foreground transition-colors">Return to Landing</span>
-      </button>
+
 
       {/* Main Card */}
       <div className="relative w-full max-w-4xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1fr_1px_340px] gap-0 items-stretch">

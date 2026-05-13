@@ -3,11 +3,13 @@ import Home from "./pages/Home"
 import Editor from "./pages/Editor"
 import Onboarding from "./pages/Onboarding"
 import Docs from "./pages/Docs"
+import Navbar from "./components/layout/Navbar"
 
 function App() {
   return (
     <Router>
       <div className="min-h-screen bg-background text-foreground font-sans">
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/setup" element={<Onboarding />} />

@@ -37,23 +37,6 @@ export function SplashSection() {
       <div className="absolute bottom-6 right-8 flex flex-col items-end gap-1">
         <span className="mono-label text-foreground/40 tracking-[0.2em]">FLOW_MINT // 2026</span>
       </div>
-
-      {/* Enter Workspace Link */}
-      <div className="absolute bottom-24 md:bottom-20 right-6 md:right-12 z-20">
-        <button
-          onClick={() => navigate("/setup")}
-          className="group flex flex-col items-end gap-1"
-        >
-          <div className="flex items-center gap-2 text-foreground/80 hover:text-foreground transition-colors font-medium">
-            <span>Enter Workspace</span>
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform">
-              <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-          <div className="h-px w-full bg-primary/40 group-hover:bg-primary transition-colors shadow-[0_0_8px_#39FF14]" />
-        </button>
-      </div>
-
       {/* Decorative Dot Matrix Top Left */}
       <div className="absolute top-32 left-32 grid-cols-6 gap-3 opacity-20 pointer-events-none hidden md:grid">
         {[...Array(24)].map((_, i) => (
@@ -108,9 +91,8 @@ export function SplashSection() {
           />
         </div>
 
-        <p className="mt-8 text-foreground/70 text-lg md:text-xl tracking-wide font-medium relative z-10">
-          <i>Intelligent Workflow Orchestration</i> <span className="text-foreground/40">(Beta 0.1)</span>
-        </p>
+        <p className="mt-8 text-foreground/70 text-lg md:text-xl tracking-wide font-medium relative z-10 flex flex-col items-center gap-2">
+          <span><i>Modular Creative System</i> <span className="text-foreground/40">(v1.0.0)</span></span>        </p>
       </div>
 
       {/* Scroll indicator (optional, at bottom center) */}
@@ -154,7 +136,7 @@ export function HeroSection() {
                 animate={{ y: "0%", opacity: 1 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
               >
-                DOCUMENT
+                CREATIVE
               </motion.h1>
             </div>
             <div className="overflow-hidden pl-8 md:pl-16">
@@ -164,7 +146,7 @@ export function HeroSection() {
                 animate={{ y: "0%", opacity: 1 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
               >
-                AUTO<span style={{ color: "#39FF14" }}>MATION</span>
+                ECO<span style={{ color: "#39FF14" }}>SYSTEM</span>
               </motion.h1>
             </div>
             <div className="overflow-hidden">
@@ -174,7 +156,7 @@ export function HeroSection() {
                 animate={{ y: "0%", opacity: 1 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.34 }}
               >
-                REIMAGINED.
+                ORCHESTRATED.
               </motion.h1>
             </div>
           </div>
@@ -186,7 +168,7 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
           >
-            Upload templates, map spreadsheet data, and generate hundreds of personalized documents in seconds.
+            FlowMint is a collective of high-performance tools designed to automate complex creative tasks. Start with our flagship bulk generation engine.
           </motion.p>
 
           {/* CTA row */}
@@ -200,7 +182,10 @@ export function HeroSection() {
               onClick={() => navigate("/setup")}
               className="group flex items-center gap-2 px-6 py-3 bg-white text-black text-sm font-semibold rounded-sm hover:bg-primary hover:text-black transition-all duration-200 animate-glow-pulse"
             >
-              <span>Initialize Workspace</span>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-black animate-pulse" />
+                <span>Boot Module 01: FlowGen</span>
+              </div>
             </button>
           </motion.div>
         </div>
@@ -409,10 +394,10 @@ export function WorkflowSection() {
       <BlueprintReveal className="relative max-w-[1400px] mx-auto px-4 md:px-8 mb-16" delay={0}>
         <div className="flex items-end justify-between">
           <div>
-            <span className="mono-label text-foreground/30 block mb-3">§ 02 — WORKFLOW ARCHITECTURE</span>
+            <span className="mono-label text-foreground/30 block mb-3">FLOWGEN PIPELINE ARCHITECTURE</span>
             <h2 className="editorial-heading text-[52px] md:text-[72px] leading-none text-foreground">
-              WORKFLOW<br />
-              <span style={{ color: "#39FF14" }}>AS ART.</span>
+              BULK ENGINE<br />
+              <span style={{ color: "#39FF14" }}>ARCHITECTURE.</span>
             </h2>
           </div>
           <div className="hidden md:block text-right">
@@ -529,8 +514,8 @@ export function EditorPreviewSection() {
       />
 
       {/* Corner labels */}
-      <span className="absolute top-8 left-8 coord-label" style={{ color: "rgba(57,255,20,0.3)" }}>[§ 03 — EDITOR]</span>
-      <span className="absolute top-8 right-8 coord-label" style={{ color: "rgba(57,255,20,0.3)" }}>[WORKSPACE v2.1]</span>
+      <span className="absolute top-8 left-8 coord-label" style={{ color: "rgba(57,255,20,0.3)" }}>[FLOWGEN EDITOR]</span>
+      <span className="absolute top-8 right-8 coord-label" style={{ color: "rgba(57,255,20,0.3)" }}>[WORKSPACE v1.0]</span>
 
       <div className="relative max-w-[1400px] mx-auto px-4 md:px-8">
         {/* Section heading */}
@@ -540,134 +525,134 @@ export function EditorPreviewSection() {
             <span style={{ color: "#39FF14" }}>WORKSPACE.</span>
           </h2>
           <p className="text-sm mt-4 max-w-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.35)" }}>
-            Precision placement. Every pixel deliberate. A canvas engineered for creative control.
+            Precision placement for FlowGen templates. Every pixel deliberate. A canvas engineered for creative batch processing.
           </p>
         </BlueprintReveal>
 
         {/* Editor UI mockup */}
         <SectionReveal delay={0.3}>
-        <div className="relative rounded-sm overflow-hidden border" style={{ borderColor: "rgba(57,255,20,0.15)", background: "rgba(255,255,255,0.03)", backdropFilter: "blur(4px)" }}>
+          <div className="relative rounded-sm overflow-hidden border" style={{ borderColor: "rgba(57,255,20,0.15)", background: "rgba(255,255,255,0.03)", backdropFilter: "blur(4px)" }}>
 
-          {/* Editor top bar */}
-          <div className="flex items-center justify-between px-5 py-3 border-b" style={{ borderColor: "rgba(57,255,20,0.1)", background: "rgba(255,255,255,0.04)" }}>
-            <div className="flex items-center gap-3">
-              <div className="flex gap-1.5">
-                <div className="w-2.5 h-2.5 rounded-full" style={{ background: "rgba(255,255,255,0.15)" }} />
-                <div className="w-2.5 h-2.5 rounded-full" style={{ background: "rgba(255,255,255,0.15)" }} />
-                <div className="w-2.5 h-2.5 rounded-full" style={{ background: "rgba(57,255,20,0.4)" }} />
+            {/* Editor top bar */}
+            <div className="flex items-center justify-between px-5 py-3 border-b" style={{ borderColor: "rgba(57,255,20,0.1)", background: "rgba(255,255,255,0.04)" }}>
+              <div className="flex items-center gap-3">
+                <div className="flex gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: "rgba(255,255,255,0.15)" }} />
+                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: "rgba(255,255,255,0.15)" }} />
+                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: "rgba(57,255,20,0.4)" }} />
+                </div>
+                <span className="mono-label" style={{ color: "rgba(255,255,255,0.3)" }}>FLOWMINT EDITOR — certificate.docx</span>
               </div>
-              <span className="mono-label" style={{ color: "rgba(255,255,255,0.3)" }}>FLOWMINT EDITOR — certificate.docx</span>
-            </div>
-            <div className="flex items-center gap-4">
-              <span className="mono-label" style={{ color: "rgba(57,255,20,0.5)" }}>● LIVE</span>
-              <span className="mono-label" style={{ color: "rgba(255,255,255,0.2)" }}>SAVE  GENERATE</span>
-            </div>
-          </div>
-
-          {/* Editor body */}
-          <div className="flex" style={{ minHeight: 420 }}>
-
-            {/* Left: Layer panel */}
-            <div className="hidden lg:block w-48 border-r flex-shrink-0 px-4 py-4" style={{ borderColor: "rgba(57,255,20,0.08)", background: "rgba(0,0,0,0.2)" }}>
-              <span className="mono-label block mb-4" style={{ color: "rgba(255,255,255,0.25)" }}>LAYERS</span>
-              {[
-                { label: "{{name}}", active: true },
-                { label: "{{date}}", active: false },
-                { label: "Logo Asset", active: false },
-                { label: "{{score}}", active: false },
-                { label: "Background", active: false },
-              ].map((layer, i) => (
-                <div key={i} className="flex items-center gap-2 px-2 py-1.5 rounded-sm mb-1"
-                  style={{ background: layer.active ? "rgba(57,255,20,0.08)" : "transparent", borderLeft: layer.active ? "2px solid #39FF14" : "2px solid transparent" }}>
-                  <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: layer.active ? "#39FF14" : "rgba(255,255,255,0.15)" }} />
-                  <span className="text-xs" style={{ color: layer.active ? "rgba(57,255,20,0.9)" : "rgba(255,255,255,0.3)", fontFamily: "Space Grotesk" }}>{layer.label}</span>
-                </div>
-              ))}
+              <div className="flex items-center gap-4">
+                <span className="mono-label" style={{ color: "rgba(57,255,20,0.5)" }}>● LIVE</span>
+                <span className="mono-label" style={{ color: "rgba(255,255,255,0.2)" }}>SAVE  GENERATE</span>
+              </div>
             </div>
 
-            {/* Center: Canvas */}
-            <div className="flex-1 flex items-center justify-center p-8 relative" style={{ background: "rgba(0,0,0,0.1)" }}>
-              {/* Alignment grid */}
-              <div className="absolute inset-0 system-grid-dark" />
+            {/* Editor body */}
+            <div className="flex" style={{ minHeight: 420 }}>
 
-              {/* A4 document mock */}
-              <div className="relative shadow-2xl" style={{ width: 260, height: 360, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 2 }}>
-                {/* Document header */}
-                <div className="absolute top-8 left-8 right-8">
-                  <div style={{ height: 2, background: "#39FF14", marginBottom: 8, opacity: 0.6 }} />
-                  <div style={{ height: 8, background: "rgba(255,255,255,0.12)", borderRadius: 1, marginBottom: 4 }} />
-                  <div style={{ height: 8, background: "rgba(255,255,255,0.06)", borderRadius: 1, width: "60%" }} />
-                </div>
-
-                {/* Active placeholder zone */}
-                <div className="absolute animate-glow-pulse"
-                  style={{ top: 80, left: 24, right: 24, height: 36, border: "1px solid rgba(57,255,20,0.6)", borderRadius: 2, background: "rgba(57,255,20,0.05)" }}>
-                  <span className="absolute top-1/2 left-3 -translate-y-1/2 text-xs" style={{ color: "rgba(57,255,20,0.8)", fontFamily: "Space Grotesk", fontSize: 10 }}>{"{{name}}"}</span>
-                  {/* Resize handle */}
-                  <div className="absolute bottom-1 right-1 w-2 h-2" style={{ border: "1px solid rgba(57,255,20,0.5)", borderTop: "none", borderLeft: "none" }} />
-                </div>
-
-                {/* Other placeholder zones */}
-                {[140, 190].map((top, i) => (
-                  <div key={i} className="absolute"
-                    style={{ top, left: 24, right: 24, height: 28, border: "1px dashed rgba(255,255,255,0.1)", borderRadius: 2, background: "rgba(255,255,255,0.02)" }}>
-                    <span className="absolute top-1/2 left-3 -translate-y-1/2 text-xs" style={{ color: "rgba(255,255,255,0.2)", fontFamily: "Space Grotesk", fontSize: 10 }}>
-                      {i === 0 ? "{{date}}" : "{{score}}"}
-                    </span>
+              {/* Left: Layer panel */}
+              <div className="hidden lg:block w-48 border-r flex-shrink-0 px-4 py-4" style={{ borderColor: "rgba(57,255,20,0.08)", background: "rgba(0,0,0,0.2)" }}>
+                <span className="mono-label block mb-4" style={{ color: "rgba(255,255,255,0.25)" }}>LAYERS</span>
+                {[
+                  { label: "{{name}}", active: true },
+                  { label: "{{date}}", active: false },
+                  { label: "Logo Asset", active: false },
+                  { label: "{{score}}", active: false },
+                  { label: "Background", active: false },
+                ].map((layer, i) => (
+                  <div key={i} className="flex items-center gap-2 px-2 py-1.5 rounded-sm mb-1"
+                    style={{ background: layer.active ? "rgba(57,255,20,0.08)" : "transparent", borderLeft: layer.active ? "2px solid #39FF14" : "2px solid transparent" }}>
+                    <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: layer.active ? "#39FF14" : "rgba(255,255,255,0.15)" }} />
+                    <span className="text-xs" style={{ color: layer.active ? "rgba(57,255,20,0.9)" : "rgba(255,255,255,0.3)", fontFamily: "Space Grotesk" }}>{layer.label}</span>
                   </div>
                 ))}
-
-                {/* Lines */}
-                {[250, 270, 290, 310, 328].map((top, i) => (
-                  <div key={i} className="absolute" style={{ top, left: 24, right: i === 4 ? 80 : 24, height: 4, background: "rgba(255,255,255,0.07)", borderRadius: 1 }} />
-                ))}
-
-                {/* Corner marks */}
-                <span className="absolute top-1 left-1" style={{ width: 6, height: 6, borderTop: "1px solid rgba(57,255,20,0.3)", borderLeft: "1px solid rgba(57,255,20,0.3)" }} />
-                <span className="absolute bottom-1 right-1" style={{ width: 6, height: 6, borderBottom: "1px solid rgba(57,255,20,0.3)", borderRight: "1px solid rgba(57,255,20,0.3)" }} />
               </div>
 
-              {/* Coordinate annotations near document */}
-              <span className="absolute top-1/2 -translate-y-1/2 right-12 coord-label" style={{ color: "rgba(57,255,20,0.25)", writingMode: "vertical-rl" }}>Y:180px</span>
-            </div>
+              {/* Center: Canvas */}
+              <div className="flex-1 flex items-center justify-center p-8 relative" style={{ background: "rgba(0,0,0,0.1)" }}>
+                {/* Alignment grid */}
+                <div className="absolute inset-0 system-grid-dark" />
 
-            {/* Right: Properties panel */}
-            <div className="hidden lg:block w-52 border-l flex-shrink-0 px-4 py-4" style={{ borderColor: "rgba(57,255,20,0.08)", background: "rgba(0,0,0,0.2)" }}>
-              <span className="mono-label block mb-4" style={{ color: "rgba(255,255,255,0.25)" }}>INSPECTOR</span>
-              {[
-                ["Variable", "{{name}}"],
-                ["Type", "Text"],
-                ["X", "24px"],
-                ["Y", "80px"],
-                ["Width", "212px"],
-                ["Height", "36px"],
-              ].map(([k, v]) => (
-                <div key={k} className="flex justify-between items-center py-1.5 border-b" style={{ borderColor: "rgba(255,255,255,0.05)" }}>
-                  <span className="text-xs" style={{ color: "rgba(255,255,255,0.25)", fontFamily: "Space Grotesk" }}>{k}</span>
-                  <span className="text-xs font-medium" style={{ color: "rgba(57,255,20,0.7)", fontFamily: "Space Grotesk" }}>{v}</span>
-                </div>
-              ))}
-              <div className="mt-4">
-                <span className="mono-label block mb-2" style={{ color: "rgba(255,255,255,0.2)" }}>STYLE</span>
-                <div className="flex gap-2">
-                  {["B", "I", "U"].map(s => (
-                    <div key={s} className="w-7 h-7 flex items-center justify-center rounded-sm text-xs font-bold"
-                      style={{ border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.3)", fontFamily: "Space Grotesk" }}>{s}</div>
+                {/* A4 document mock */}
+                <div className="relative shadow-2xl" style={{ width: 260, height: 360, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 2 }}>
+                  {/* Document header */}
+                  <div className="absolute top-8 left-8 right-8">
+                    <div style={{ height: 2, background: "#39FF14", marginBottom: 8, opacity: 0.6 }} />
+                    <div style={{ height: 8, background: "rgba(255,255,255,0.12)", borderRadius: 1, marginBottom: 4 }} />
+                    <div style={{ height: 8, background: "rgba(255,255,255,0.06)", borderRadius: 1, width: "60%" }} />
+                  </div>
+
+                  {/* Active placeholder zone */}
+                  <div className="absolute animate-glow-pulse"
+                    style={{ top: 80, left: 24, right: 24, height: 36, border: "1px solid rgba(57,255,20,0.6)", borderRadius: 2, background: "rgba(57,255,20,0.05)" }}>
+                    <span className="absolute top-1/2 left-3 -translate-y-1/2 text-xs" style={{ color: "rgba(57,255,20,0.8)", fontFamily: "Space Grotesk", fontSize: 10 }}>{"{{name}}"}</span>
+                    {/* Resize handle */}
+                    <div className="absolute bottom-1 right-1 w-2 h-2" style={{ border: "1px solid rgba(57,255,20,0.5)", borderTop: "none", borderLeft: "none" }} />
+                  </div>
+
+                  {/* Other placeholder zones */}
+                  {[140, 190].map((top, i) => (
+                    <div key={i} className="absolute"
+                      style={{ top, left: 24, right: 24, height: 28, border: "1px dashed rgba(255,255,255,0.1)", borderRadius: 2, background: "rgba(255,255,255,0.02)" }}>
+                      <span className="absolute top-1/2 left-3 -translate-y-1/2 text-xs" style={{ color: "rgba(255,255,255,0.2)", fontFamily: "Space Grotesk", fontSize: 10 }}>
+                        {i === 0 ? "{{date}}" : "{{score}}"}
+                      </span>
+                    </div>
                   ))}
+
+                  {/* Lines */}
+                  {[250, 270, 290, 310, 328].map((top, i) => (
+                    <div key={i} className="absolute" style={{ top, left: 24, right: i === 4 ? 80 : 24, height: 4, background: "rgba(255,255,255,0.07)", borderRadius: 1 }} />
+                  ))}
+
+                  {/* Corner marks */}
+                  <span className="absolute top-1 left-1" style={{ width: 6, height: 6, borderTop: "1px solid rgba(57,255,20,0.3)", borderLeft: "1px solid rgba(57,255,20,0.3)" }} />
+                  <span className="absolute bottom-1 right-1" style={{ width: 6, height: 6, borderBottom: "1px solid rgba(57,255,20,0.3)", borderRight: "1px solid rgba(57,255,20,0.3)" }} />
+                </div>
+
+                {/* Coordinate annotations near document */}
+                <span className="absolute top-1/2 -translate-y-1/2 right-12 coord-label" style={{ color: "rgba(57,255,20,0.25)", writingMode: "vertical-rl" }}>Y:180px</span>
+              </div>
+
+              {/* Right: Properties panel */}
+              <div className="hidden lg:block w-52 border-l flex-shrink-0 px-4 py-4" style={{ borderColor: "rgba(57,255,20,0.08)", background: "rgba(0,0,0,0.2)" }}>
+                <span className="mono-label block mb-4" style={{ color: "rgba(255,255,255,0.25)" }}>INSPECTOR</span>
+                {[
+                  ["Variable", "{{name}}"],
+                  ["Type", "Text"],
+                  ["X", "24px"],
+                  ["Y", "80px"],
+                  ["Width", "212px"],
+                  ["Height", "36px"],
+                ].map(([k, v]) => (
+                  <div key={k} className="flex justify-between items-center py-1.5 border-b" style={{ borderColor: "rgba(255,255,255,0.05)" }}>
+                    <span className="text-xs" style={{ color: "rgba(255,255,255,0.25)", fontFamily: "Space Grotesk" }}>{k}</span>
+                    <span className="text-xs font-medium" style={{ color: "rgba(57,255,20,0.7)", fontFamily: "Space Grotesk" }}>{v}</span>
+                  </div>
+                ))}
+                <div className="mt-4">
+                  <span className="mono-label block mb-2" style={{ color: "rgba(255,255,255,0.2)" }}>STYLE</span>
+                  <div className="flex gap-2">
+                    {["B", "I", "U"].map(s => (
+                      <div key={s} className="w-7 h-7 flex items-center justify-center rounded-sm text-xs font-bold"
+                        style={{ border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.3)", fontFamily: "Space Grotesk" }}>{s}</div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Bottom status bar */}
-          <div className="flex items-center justify-between px-5 py-2 border-t" style={{ borderColor: "rgba(57,255,20,0.08)", background: "rgba(0,0,0,0.3)" }}>
-            <div className="flex items-center gap-4">
-              <span className="mono-label" style={{ color: "rgba(57,255,20,0.4)" }}>● 3 ELEMENTS</span>
-              <span className="mono-label" style={{ color: "rgba(255,255,255,0.15)" }}>ZOOM: 100%</span>
+            {/* Bottom status bar */}
+            <div className="flex items-center justify-between px-5 py-2 border-t" style={{ borderColor: "rgba(57,255,20,0.08)", background: "rgba(0,0,0,0.3)" }}>
+              <div className="flex items-center gap-4">
+                <span className="mono-label" style={{ color: "rgba(57,255,20,0.4)" }}>● 3 ELEMENTS</span>
+                <span className="mono-label" style={{ color: "rgba(255,255,255,0.15)" }}>ZOOM: 100%</span>
+              </div>
+              <span className="mono-label" style={{ color: "rgba(255,255,255,0.15)" }}>A4 — 210×297mm</span>
             </div>
-            <span className="mono-label" style={{ color: "rgba(255,255,255,0.15)" }}>A4 — 210×297mm</span>
           </div>
-        </div>
         </SectionReveal>
       </div>
     </section>
@@ -740,5 +725,124 @@ function WorkflowDiagnostics() {
         ))}
       </div>
     </div>
+  )
+}
+
+// --- EcosystemHub.jsx ---
+export function EcosystemHub() {
+  const navigate = useNavigate()
+  return (
+    <section id="ecosystem" className="relative py-16 md:py-32 overflow-hidden bg-background">
+      <div className="absolute inset-0 system-grid-fine opacity-50" />
+      <div className="absolute top-0 left-0 right-0 hairline" />
+
+      <div className="relative max-w-[1400px] mx-auto px-4 md:px-8">
+        {/* Header */}
+        <BlueprintReveal delay={0}>
+          <div className="flex items-end justify-between mb-16">
+            <div>
+              <span className="mono-label text-foreground/30 block mb-3">§SYSTEM MODULES</span>
+              <h2 className="editorial-heading text-[52px] md:text-[72px] leading-none text-foreground">
+                CREATIVE<br />
+                <span style={{ color: "#39FF14" }}>COLLECTIVE.</span>
+              </h2>
+            </div>
+            <div className="hidden md:block text-right">
+              <span className="mono-label text-foreground/25 block">MODULE 01 ONLINE</span>
+              <span className="mono-label text-foreground/25 block mt-1">2 MODULES IN DEV</span>
+            </div>
+          </div>
+          <div className="hairline mb-12" />
+        </BlueprintReveal>
+
+        {/* Modules Grid */}
+        <StaggerContainer className="flex overflow-x-auto snap-x snap-mandatory gap-4 md:grid md:grid-cols-3 pb-8 md:pb-0 hide-scrollbar" delay={0.1} stagger={0.1}>
+
+          {/* Active Module: FlowGen */}
+          <StaggerItem className="snap-center min-w-[85vw] sm:min-w-[320px] md:min-w-0">
+            <div className="relative sys-node corner-marks rounded-sm p-6 group flex flex-col justify-between bg-white/80 h-full border-[#39FF14]/30 hover:border-[#39FF14]/60 transition-all cursor-pointer" onClick={() => navigate("/setup")}>
+              <div className="flex items-start justify-between mb-8">
+                <span className="mono-label text-[#39FF14] font-bold tracking-widest">MODULE 01</span>
+                <span className="flex items-center gap-2 mono-label text-foreground/40">
+                  <span className="w-2 h-2 rounded-full bg-[#39FF14] animate-pulse" />
+                  ONLINE
+                </span>
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-foreground mb-3 leading-snug tracking-tight">FlowGen</h3>
+                <p className="text-sm text-foreground/60 leading-relaxed mb-6">High-performance bulk document generation engine. Map spreadsheet data to high-fidelity templates in seconds.</p>
+                <div className="flex items-center gap-2 text-xs font-mono text-[#39FF14] group-hover:translate-x-1 transition-transform">
+                  EXPLORE <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                </div>
+              </div>
+              <div className="absolute inset-0 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: "radial-gradient(circle at 10% 90%, rgba(57,255,20,0.08) 0%, transparent 60%)" }} />
+            </div>
+          </StaggerItem>
+
+          {/* Inactive Module 1 */}
+          <StaggerItem className="snap-center min-w-[85vw] sm:min-w-[320px] md:min-w-0 group relative">
+            <div className="relative sys-node rounded-sm p-6 flex flex-col justify-between bg-white/40 border-border/10 h-full overflow-hidden">
+              {/* Blurred Content */}
+              <div className="blur-[6px] select-none pointer-events-none opacity-20 grayscale flex flex-col justify-between h-full">
+                <div className="flex items-start justify-between mb-8">
+                  <span className="mono-label text-foreground/40 font-bold tracking-widest">MODULE 02</span>
+                  <span className="flex items-center gap-2 mono-label text-foreground/30">
+                    <span className="w-1 h-1 rounded-full bg-foreground/30" />
+                    DEV_BRANCH
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-foreground/50 mb-3 leading-snug tracking-tight">AssetFlow</h3>
+                  <p className="text-sm text-foreground/40 leading-relaxed">Centralized digital asset orchestrator. Automate formatting, tagging, and distribution across creative teams.</p>
+                </div>
+              </div>
+
+              {/* Locked Overlay */}
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-background/5 backdrop-blur-[2px]">
+                <div className="w-12 h-12 border border-foreground/10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mb-3 shadow-sm group-hover:border-primary/40 transition-colors duration-500">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-foreground/40 group-hover:text-primary transition-colors duration-500">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                </div>
+                <span className="mono-label text-[10px] text-foreground/40 tracking-[0.3em] font-bold group-hover:text-primary transition-colors duration-500 uppercase">Coming Soon</span>
+              </div>
+            </div>
+          </StaggerItem>
+
+          {/* Inactive Module 2 */}
+          <StaggerItem className="snap-center min-w-[85vw] sm:min-w-[320px] md:min-w-0 group relative">
+            <div className="relative sys-node rounded-sm p-6 flex flex-col justify-between bg-white/40 border-border/10 h-full overflow-hidden">
+              {/* Blurred Content */}
+              <div className="blur-[6px] select-none pointer-events-none opacity-20 grayscale flex flex-col justify-between h-full">
+                <div className="flex items-start justify-between mb-8">
+                  <span className="mono-label text-foreground/40 font-bold tracking-widest">MODULE 03</span>
+                  <span className="flex items-center gap-2 mono-label text-foreground/30">
+                    <span className="w-1 h-1 rounded-full bg-foreground/30" />
+                    OFFLINE
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-foreground/50 mb-3 leading-snug tracking-tight">DataSync</h3>
+                  <p className="text-sm text-foreground/40 leading-relaxed">Real-time API ingestion layer. Stream external data directly into your FlowMint ecosystem.</p>
+                </div>
+              </div>
+
+              {/* Locked Overlay */}
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-background/5 backdrop-blur-[2px]">
+                <div className="w-12 h-12 border border-foreground/10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mb-3 shadow-sm group-hover:border-primary/40 transition-colors duration-500">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-foreground/40 group-hover:text-primary transition-colors duration-500">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                </div>
+                <span className="mono-label text-[10px] text-foreground/40 tracking-[0.3em] font-bold group-hover:text-primary transition-colors duration-500 uppercase">Coming Soon</span>
+              </div>
+            </div>
+          </StaggerItem>
+
+        </StaggerContainer>
+      </div>
+    </section>
   )
 }

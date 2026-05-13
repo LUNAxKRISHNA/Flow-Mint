@@ -168,12 +168,10 @@
   backdrop-filter: blur(8px);
   transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
-@media (hover: hover) and (pointer: fine) {
-  .sys-node:hover {
-    border-color: rgba(57, 255, 20, 0.6);
-    box-shadow: 0 0 16px rgba(57, 255, 20, 0.15), 0 4px 24px rgba(0,0,0,0.06);
-    transform: translateY(-2px);
-  }
+.sys-node:hover {
+  border-color: rgba(57, 255, 20, 0.6);
+  box-shadow: 0 0 16px rgba(57, 255, 20, 0.15), 0 4px 24px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
 }
 
 /* ── Animated Connection Line ────────────────────────────────────── */
@@ -274,13 +272,4 @@
 
 .animate-scroll-log {
   animation: scrollLog 15s linear infinite;
-}
-
-/* ── Hide Scrollbar for Carousels ────────────────────────────────── */
-.hide-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
 }

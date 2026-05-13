@@ -1,4 +1,4 @@
-import { Type, AlignLeft, AlignCenter, AlignRight, Trash2 } from "lucide-react"
+import { Type, AlignLeft, AlignCenter, AlignRight, Trash2, Italic } from "lucide-react"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -113,6 +113,7 @@ export default function PropertiesPanel({ placeholder, onPropertyChange, onDelet
                   <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-muted-foreground">px</span>
                 </div>
               </div>
+            <div className="grid grid-cols-[1fr_auto] gap-2 items-end">
               <div className="space-y-1">
                 <Label className="text-xs">Weight</Label>
                 <select
@@ -125,6 +126,18 @@ export default function PropertiesPanel({ placeholder, onPropertyChange, onDelet
                   <option>Bold</option>
                 </select>
               </div>
+              <button
+                onClick={() => change("fontStyle", placeholder.fontStyle === "italic" ? "normal" : "italic")}
+                className={`h-8 w-8 flex items-center justify-center border border-input rounded-sm transition-colors
+                  ${placeholder.fontStyle === "italic"
+                    ? "bg-[#39FF14]/10 text-[#39FF14] border-[#39FF14]/30"
+                    : "text-muted-foreground hover:bg-muted/50"
+                  }`}
+                title="Italic"
+              >
+                <Italic className="h-3.5 w-3.5" />
+              </button>
+            </div>
             </div>
 
             {/* Alignment */}

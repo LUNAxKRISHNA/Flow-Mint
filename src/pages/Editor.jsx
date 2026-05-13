@@ -81,6 +81,7 @@ export default function Editor() {
         fontSize: 20,
         fontFamily: "Inter",
         fontWeight: "Normal",
+        fontStyle: "normal",
         align: "left",
         color: "#1e293b",
       },
@@ -133,6 +134,10 @@ export default function Editor() {
   const handleGenerate = useCallback(async () => {
     if (!csvData.rows.length) {
       alert("Please upload a CSV file first via the toolbar.")
+      return
+    }
+    if (csvData.rows.length > 100) {
+      alert(`SYSTEM LIMIT: You are attempting to generate ${csvData.rows.length} files. The Standard Module is capped at 100 files per batch to ensure performance. Please reduce your data source rows.`)
       return
     }
     setGenProgress({ isOpen: true, current: 0, total: csvData.rows.length, isZipping: false, isDone: false })

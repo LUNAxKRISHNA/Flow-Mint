@@ -121,7 +121,6 @@ export function HeroSection() {
 
       {/* Corner coord markers */}
       <span className="absolute bottom-8 left-6 coord-label" style={{ color: "rgba(57,255,20,0.3)" }}>.-.. ..- -. .-</span>
-      <span className="absolute bottom-8 right-6 coord-label" style={{ color: "rgba(57,255,20,0.3)" }}>LATENCY: &lt;2ms</span>
 
       <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8 pt-24 pb-12 md:pt-28 md:pb-16 grid grid-cols-1 lg:grid-cols-[1fr_1px_1fr] gap-0 items-center">
 
@@ -276,8 +275,8 @@ function HeroVisualization() {
             <div className="w-2 h-2 bg-orange-400 rounded-full" />
             <span className="mono-label text-white/40">OUTPUT</span>
           </div>
-          <p className="text-sm font-semibold text-white">148 PDFs</p>
-          <p className="text-xs text-white/40 mt-1">Generated in 1.2s</p>
+          <p className="text-sm font-semibold text-white">98 PDFs</p>
+          <p className="text-xs text-white/40 mt-1">Generated in 6.2s</p>
           <div className="mt-2 flex gap-1">
             {[...Array(5)].map((_, i) => (
               <div key={i} className="flex-1 h-1 bg-primary/30 rounded-full" />
@@ -290,7 +289,7 @@ function HeroVisualization() {
       <div className="relative md:absolute md:bottom-10 md:left-0 animate-node-float w-full max-w-[260px] md:max-w-none md:w-auto" style={{ animationDelay: "1.5s" }}>
         <div className="sys-node rounded-sm px-3 py-2 text-xs bg-zinc-900/60 border-white/5 backdrop-blur-xl hover:border-primary/30 transition-all flex items-center justify-center md:justify-start">
           <span className="mono-label text-white/40">QUEUE:</span>
-          <span className="text-white/70 ml-2">148 jobs done</span>
+          <span className="text-white/70 ml-2">59 jobs done</span>
         </div>
       </div>
 
@@ -401,7 +400,7 @@ export function WorkflowSection() {
             </h2>
           </div>
           <div className="hidden md:block text-right">
-            <span className="mono-label text-foreground/25 block mt-1">4 STAGES / 0 ERRORS</span>
+            <span className="mono-label text-foreground/25 block mt-1">4 STAGES</span>
           </div>
         </div>
         <div className="hairline mt-8" />

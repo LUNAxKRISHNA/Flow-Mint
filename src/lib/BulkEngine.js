@@ -123,6 +123,7 @@ export async function runBulkGeneration({
           font-family: ${ph.fontFamily}, Inter, sans-serif;
           font-size: ${ph.fontSize}px;
           font-weight: ${ph.fontWeight === "Bold" ? 700 : ph.fontWeight === "Medium" ? 500 : 400};
+          font-style: ${ph.fontStyle};
           color: ${ph.color};
           text-align: ${ph.align};
           overflow: hidden;

@@ -57,6 +57,12 @@ export default function CsvUploadModal({
           fileName: file.name,
           size: (file.size / 1024).toFixed(1) + " KB"
         })
+
+        if (rows.length > 100) {
+          setError(`SYSTEM_OVERLOAD: Detected ${rows.length} records. The current module is limited to 100 records per batch for stability.`);
+          setIsParsing(false);
+          return;
+        }
         
         setTimeout(() => {
           setIsParsing(false)

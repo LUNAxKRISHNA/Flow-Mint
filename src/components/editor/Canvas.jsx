@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, useCallback } from "react"
-import { motion } from "framer-motion"
 
 const MAX_CANVAS_W = 900
 
@@ -116,9 +115,12 @@ function DraggablePlaceholder({
   zoom,
 }) {
   const [isEditing, setIsEditing] = useState(false)
+  const [isResizing, setIsResizing] = useState(false)
+  const [isDragging, setIsDragging] = useState(false)
   const [editValue, setEditValue] = useState(ph.key)
   const inputRef = useRef(null)
   const resizeState = useRef(null)
+  const dragState = useRef(null)
 
   // Keep edit value in sync with external key changes (e.g. PropertiesPanel)
   useEffect(() => {
@@ -143,10 +145,15 @@ function DraggablePlaceholder({
     setIsEditing(false)
   }, [editValue, ph.key, ph.id, onPropertyChange])
 
-  // ── Corner resize via raw mouse events ───────────────────────────────────
-  const handleResizeMouseDown = useCallback((corner, e) => {
-    e.stopPropagation()
-    e.preventDefault()
+  // ── Corner resize via raw pointer events ─────────────────────────────────
+  const handleResizePointerDown = useCallback((corner, e) => {
+    e.stopPropagation()   // stop canvas click
+    e.preventDefault()    // prevent text selection
+
+    // Capture pointer so move/up fire even if cursor leaves the handle
+    e.currentTarget.setPointerCapture(e.pointerId)
+
+    setIsResizing(true)   // disable framer-motion drag while we resize
 
     resizeState.current = {
       corner,
@@ -158,7 +165,7 @@ function DraggablePlaceholder({
       startPy: ph.y,
     }
 
-    const onMouseMove = (ev) => {
+    const onPointerMove = (ev) => {
       const r = resizeState.current
       if (!r) return
 
@@ -200,162 +207,194 @@ function DraggablePlaceholder({
       onResize(ph.id, { x: newX, y: newY, width: newW, height: newH })
     }
 
-    const onMouseUp = () => {
+    const onPointerUp = () => {
       resizeState.current = null
-      document.removeEventListener("mousemove", onMouseMove)
-      document.removeEventListener("mouseup", onMouseUp)
+      setIsResizing(false)
+      document.removeEventListener("pointermove", onPointerMove)
+      document.removeEventListener("pointerup", onPointerUp)
     }
 
-    document.addEventListener("mousemove", onMouseMove)
-    document.addEventListener("mouseup", onMouseUp)
-  }, [ph, canvasSize, onResize])
+    document.addEventListener("pointermove", onPointerMove)
+    document.addEventListener("pointerup", onPointerUp)
+  }, [ph, canvasSize, onResize, zoom])
+
+  // ── Manual Dragging via pointer events ──────────────────────────────────
+  const handleDragPointerDown = useCallback((e) => {
+    if (isEditing || isResizing) return
+    e.stopPropagation()
+    onSelect()
+
+    // Capture pointer
+    e.currentTarget.setPointerCapture(e.pointerId)
+    setIsDragging(true)
+
+    dragState.current = {
+      startX: e.clientX,
+      startY: e.clientY,
+      startPx: ph.x,
+      startPy: ph.y,
+    }
+
+    const onPointerMove = (ev) => {
+      const d = dragState.current
+      if (!d) return
+
+      const dx = (ev.clientX - d.startX) / zoom
+      const dy = (ev.clientY - d.startY) / zoom
+
+      let newX = d.startPx + dx
+      let newY = d.startPy + dy
+
+      // Clamp to bounds
+      newX = Math.max(0, Math.min(canvasSize.w - ph.width, newX))
+      newY = Math.max(0, Math.min(canvasSize.h - ph.height, newY))
+
+      onPositionChange(ph.id, newX, newY)
+    }
+
+    const onPointerUp = () => {
+      dragState.current = null
+      setIsDragging(false)
+      document.removeEventListener("pointermove", onPointerMove)
+      document.removeEventListener("pointerup", onPointerUp)
+    }
+
+    document.addEventListener("pointermove", onPointerMove)
+    document.addEventListener("pointerup", onPointerUp)
+  }, [isEditing, isResizing, onSelect, ph, zoom, canvasSize, onPositionChange])
 
   const fontWeight = ph.fontWeight === "Bold" ? 700 : ph.fontWeight === "Medium" ? 500 : 400
 
   return (
-    <>
-      <motion.div
-        drag={!isEditing}
-        dragMomentum={false}
-        dragElastic={0}
-        dragConstraints={{
-          left: 0,
-          top: 0,
-          right: canvasSize.w - ph.width,
-          bottom: canvasSize.h - ph.height,
-        }}
-        initial={false}
-        animate={{ x: ph.x, y: ph.y }}
-        onDragEnd={(e, info) => {
-          const rawX = ph.x + info.offset.x / zoom
-          const rawY = ph.y + info.offset.y / zoom
-          const newX = Math.max(0, Math.min(canvasSize.w - ph.width, rawX))
-          const newY = Math.max(0, Math.min(canvasSize.h - ph.height, rawY))
-          onPositionChange(ph.id, newX, newY)
-        }}
-        data-ph-id={ph.id}
-        className="absolute select-none"
+    <div
+      data-ph-id={ph.id}
+      className="absolute select-none group"
+      style={{
+        width: ph.width,
+        height: ph.height,
+        left: 0,
+        top: 0,
+        transform: `translate(${ph.x}px, ${ph.y}px)`,
+        zIndex: isSelected ? 20 : 10,
+        cursor: isEditing ? "text" : isDragging ? "grabbing" : "grab",
+        // Smooth transition only when NOT dragging or resizing (e.g. sidebar edits)
+        transition: isDragging || isResizing ? "none" : "transform 0.2s ease-out, width 0.2s ease-out, height 0.2s ease-out",
+      }}
+      onPointerDown={handleDragPointerDown}
+      onDoubleClick={(e) => {
+        e.stopPropagation()
+        onSelect()
+        setIsEditing(true)
+      }}
+    >
+      {/* Main field box */}
+      <div
+        className="relative w-full h-full flex items-center px-2 overflow-hidden"
         style={{
-          width: ph.width,
-          height: ph.height,
-          zIndex: isSelected ? 20 : 10,
-          cursor: isEditing ? "text" : "grab",
-        }}
-        onClick={(e) => {
-          e.stopPropagation()
-          onSelect()
-        }}
-        onDoubleClick={(e) => {
-          e.stopPropagation()
-          onSelect()
-          setIsEditing(true)
+          border: isEditing
+            ? "1.5px solid #39FF14"
+            : isSelected
+            ? "1.5px solid #39FF14"
+            : "1.5px dashed rgba(57,255,20,0.45)",
+          background: isEditing
+            ? "rgba(57,255,20,0.12)"
+            : isSelected
+            ? "rgba(57,255,20,0.08)"
+            : "rgba(57,255,20,0.04)",
+          backdropFilter: "blur(1px)",
+          transition: "all 0.2s ease-out",
         }}
       >
-        {/* Main field box */}
-        <div
-          className="relative w-full h-full flex items-center px-2 transition-all duration-150 overflow-hidden"
-          style={{
-            border: isEditing
-              ? "1.5px solid #39FF14"
-              : isSelected
-              ? "1.5px solid #39FF14"
-              : "1.5px dashed rgba(57,255,20,0.45)",
-            background: isEditing
-              ? "rgba(57,255,20,0.12)"
-              : isSelected
-              ? "rgba(57,255,20,0.08)"
-              : "rgba(57,255,20,0.04)",
-            backdropFilter: "blur(1px)",
-          }}
+        {isEditing ? (
+          /* ── Inline rename input ─────────────────────────────────── */
+          <input
+            ref={inputRef}
+            value={editValue}
+            onChange={(e) => setEditValue(e.target.value)}
+            onBlur={commitEdit}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") commitEdit()
+              if (e.key === "Escape") { setEditValue(ph.key); setIsEditing(false) }
+            }}
+            onClick={(e) => e.stopPropagation()}
+            onPointerDown={(e) => e.stopPropagation()}
+            className="w-full bg-transparent border-none outline-none font-mono"
+            style={{
+              fontSize: ph.fontSize,
+              fontFamily: `${ph.fontFamily}, Inter, sans-serif`,
+              fontWeight,
+              textAlign: ph.align,
+              color: "#39FF14",
+              caretColor: "#39FF14",
+              letterSpacing: "0.02em",
+              fontStyle: ph.fontStyle,
+            }}
+          />
+        ) : (
+          /* ── Placeholder key label ───────────────────────────────── */
+          <span
+            className="font-mono leading-none pointer-events-none w-full truncate"
+            style={{
+              fontSize: ph.fontSize,
+              fontFamily: ph.fontFamily,
+              fontWeight,
+              textAlign: ph.align,
+              color: isSelected ? "#39FF14" : "rgba(57,255,20,0.75)",
+              textShadow: isSelected ? "0 0 8px rgba(57,255,20,0.4)" : "none",
+              fontStyle: ph.fontStyle,
+            }}
+          >
+            {`{{${ph.key}}}`}
+          </span>
+        )}
+      </div>
+
+      {/* ── Resize corner handles (only when selected) ─────────────────── */}
+      {isSelected && (
+        <>
+          <Handle pos="tl" onPointerDown={(e) => handleResizePointerDown("tl", e)} />
+          <Handle pos="tr" onPointerDown={(e) => handleResizePointerDown("tr", e)} />
+          <Handle pos="bl" onPointerDown={(e) => handleResizePointerDown("bl", e)} />
+          <Handle pos="br" onPointerDown={(e) => handleResizePointerDown("br", e)} />
+        </>
+      )}
+
+      {/* ── Coordinate + size readout ──────────────────────────────────── */}
+      {isSelected && (
+        <span
+          className="absolute -top-5 left-0 font-mono text-[9px] whitespace-nowrap pointer-events-none"
+          style={{ color: "rgba(57,255,20,0.6)" }}
         >
-          {isEditing ? (
-            /* ── Inline rename input ─────────────────────────────────── */
-            <input
-              ref={inputRef}
-              value={editValue}
-              onChange={(e) => setEditValue(e.target.value)}
-              onBlur={commitEdit}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") commitEdit()
-                if (e.key === "Escape") { setEditValue(ph.key); setIsEditing(false) }
-              }}
-              onClick={(e) => e.stopPropagation()}
-              className="w-full bg-transparent border-none outline-none font-mono"
-              style={{
-                fontSize: ph.fontSize,
-                fontFamily: `${ph.fontFamily}, Inter, sans-serif`,
-                fontWeight,
-                textAlign: ph.align,
-                color: "#39FF14",
-                caretColor: "#39FF14",
-                letterSpacing: "0.02em",
-              }}
-            />
-          ) : (
-            /* ── Placeholder key label ───────────────────────────────── */
-            <span
-              className="font-mono leading-none pointer-events-none w-full truncate"
-              style={{
-                fontSize: ph.fontSize,
-                fontFamily: ph.fontFamily,
-                fontWeight,
-                textAlign: ph.align,
-                color: isSelected ? "#39FF14" : "rgba(57,255,20,0.75)",
-                textShadow: isSelected ? "0 0 8px rgba(57,255,20,0.4)" : "none",
-              }}
-            >
-              {`{{${ph.key}}}`}
-            </span>
-          )}
-        </div>
+          [{Math.round(ph.x)}, {Math.round(ph.y)}] {Math.round(ph.width)}×{Math.round(ph.height)}
+        </span>
+      )}
 
-        {/* ── Resize corner handles (only when selected) ─────────────────── */}
-        {isSelected && (
-          <>
-            <Handle pos="tl" onMouseDown={(e) => handleResizeMouseDown("tl", e)} />
-            <Handle pos="tr" onMouseDown={(e) => handleResizeMouseDown("tr", e)} />
-            <Handle pos="bl" onMouseDown={(e) => handleResizeMouseDown("bl", e)} />
-            <Handle pos="br" onMouseDown={(e) => handleResizeMouseDown("br", e)} />
-          </>
-        )}
+      {/* ── Double-click hint (unselected hover) ───────────────────────── */}
+      {!isSelected && (
+        <span
+          className="absolute -bottom-5 left-0 font-mono text-[8px] whitespace-nowrap pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"
+          style={{ color: "rgba(57,255,20,0.4)" }}
+        >
+          dbl-click to rename
+        </span>
+      )}
 
-        {/* ── Coordinate + size readout ──────────────────────────────────── */}
-        {isSelected && (
-          <span
-            className="absolute -top-5 left-0 font-mono text-[9px] whitespace-nowrap pointer-events-none"
-            style={{ color: "rgba(57,255,20,0.6)" }}
-          >
-            [{Math.round(ph.x)}, {Math.round(ph.y)}] {Math.round(ph.width)}×{Math.round(ph.height)}
-          </span>
-        )}
-
-        {/* ── Double-click hint (unselected hover) ───────────────────────── */}
-        {!isSelected && (
-          <span
-            className="absolute -bottom-5 left-0 font-mono text-[8px] whitespace-nowrap pointer-events-none opacity-0 group-hover:opacity-100"
-            style={{ color: "rgba(57,255,20,0.4)" }}
-          >
-            dbl-click to rename
-          </span>
-        )}
-
-        {/* ── Editing mode tooltip ───────────────────────────────────────── */}
-        {isEditing && (
-          <span
-            className="absolute -bottom-5 left-0 font-mono text-[8px] whitespace-nowrap pointer-events-none"
-            style={{ color: "rgba(57,255,20,0.6)" }}
-          >
-            Enter to confirm · Esc to cancel
-          </span>
-        )}
-      </motion.div>
-    </>
+      {/* ── Editing mode tooltip ───────────────────────────────────────── */}
+      {isEditing && (
+        <span
+          className="absolute -bottom-5 left-0 font-mono text-[8px] whitespace-nowrap pointer-events-none"
+          style={{ color: "rgba(57,255,20,0.6)" }}
+        >
+          Enter to confirm · Esc to cancel
+        </span>
+      )}
+    </div>
   )
 }
 
 // ─── Corner resize handle ────────────────────────────────────────────────────
 
-function Handle({ pos, onMouseDown }) {
+function Handle({ pos, onPointerDown }) {
   const posMap = {
     tl: { top: -5, left: -5, cursor: "nwse-resize" },
     tr: { top: -5, right: -5, cursor: "nesw-resize" },
@@ -372,7 +411,7 @@ function Handle({ pos, onMouseDown }) {
         cursor,
         boxShadow: "0 0 6px rgba(57,255,20,0.6)",
       }}
-      onMouseDown={onMouseDown}
+      onPointerDown={onPointerDown}
     />
   )
 }

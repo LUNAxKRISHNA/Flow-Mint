@@ -183,8 +183,8 @@ export default function Onboarding() {
 
       {/* Corner coordinate markers */}
 
-      <span className="absolute bottom-6 left-8 font-mono text-[9px] tracking-widest text-foreground/20 uppercase">SYSTEM: NOMINAL</span>
-      <span className="absolute bottom-6 right-8 font-mono text-[9px] tracking-widest text-foreground/20 uppercase">v2.1 — BETA</span>
+      <span className="absolute bottom-6 left-8 hidden xs:block font-mono text-[9px] tracking-widest text-foreground/20 uppercase">SYSTEM: NOMINAL</span>
+      <span className="absolute bottom-6 right-8 hidden xs:block font-mono text-[9px] tracking-widest text-foreground/20 uppercase">v2.1 — BETA</span>
 
       {/* Scan line (ambient) */}
       <div className="scan-line" />
@@ -200,7 +200,7 @@ export default function Onboarding() {
           {/* Section label */}
           <div className="mb-8">
             <span className="font-mono text-[9px] tracking-[0.2em] text-[#39FF14]/50 uppercase block mb-3">§ 01 — TEMPLATE INGESTION</span>
-            <h1 className="font-bold text-[42px] md:text-[56px] leading-none tracking-tight text-foreground">
+            <h1 className="font-bold text-[28px] xs:text-[36px] md:text-[56px] leading-none tracking-tight text-foreground">
               LOAD YOUR<br />
               <span style={{ color: "#39FF14" }}>BLUEPRINT.</span>
             </h1>
@@ -361,6 +361,21 @@ export default function Onboarding() {
               </motion.div>
             )}
           </AnimatePresence>
+
+          {/* Mobile-only compact status strip (lg:hidden) */}
+          {fileMeta && (
+            <div className="lg:hidden mt-4 border border-border/10 p-3 flex items-center justify-between gap-3"
+              style={{ background: "rgba(255,255,255,0.5)", backdropFilter: "blur(8px)" }}>
+              <span className="font-mono text-[9px] tracking-widest text-foreground/40 uppercase truncate flex-1 min-w-0">
+                {fileMeta.name}
+              </span>
+              <span className={`font-mono text-[9px] tracking-widest uppercase shrink-0 ${
+                phase === "done" ? "text-[#39FF14]" : "text-foreground/40"
+              }`}>
+                {phase === "scanning" ? "SCANNING..." : phase === "done" ? "READY" : "—"}
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Divider */}

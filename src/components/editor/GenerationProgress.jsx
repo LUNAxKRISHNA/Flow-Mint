@@ -74,7 +74,7 @@ export default function GenerationProgress({
                 />
               )}
 
-              <div className="p-8">
+              <div className="p-5 sm:p-8">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
@@ -121,7 +121,7 @@ export default function GenerationProgress({
                     key={pct}
                     initial={{ opacity: 0.4 }}
                     animate={{ opacity: 1 }}
-                    className="font-mono font-bold text-[72px] leading-none tracking-tight"
+                    className="font-mono font-bold text-[52px] sm:text-[72px] leading-none tracking-tight"
                     style={{ color: isDone ? "#39FF14" : "white" }}
                   >
                     {isDone ? "100" : pct}

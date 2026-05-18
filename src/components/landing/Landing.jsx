@@ -52,7 +52,7 @@ export function SplashSection() {
           <div className="absolute inset-x-[-20%] h-[2px] bg-primary/30 blur-[2px] z-20 pointer-events-none animate-[scanPulse_4s_ease-in-out_infinite]" />
 
           {/* Background blurred outline text effect based on the reference */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[5rem] md:text-[14rem] font-bold text-transparent opacity-[0.03] pointer-events-none select-none tracking-tighter"
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[3rem] xs:text-[4.5rem] md:text-[14rem] font-bold text-transparent opacity-[0.03] pointer-events-none select-none tracking-tighter"
             style={{ WebkitTextStroke: "2px var(--foreground)" }}>
             FlowMint
           </div>
@@ -130,7 +130,7 @@ export function HeroSection() {
           <div className="mb-8">
             <div className="overflow-hidden">
               <motion.h1
-                className="editorial-heading text-[52px] md:text-[96px] lg:text-[108px] text-white leading-none"
+                className="editorial-heading text-[32px] xs:text-[40px] sm:text-[52px] md:text-[96px] lg:text-[108px] text-white leading-none"
                 initial={{ y: "110%", opacity: 0 }}
                 animate={{ y: "0%", opacity: 1 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
@@ -138,9 +138,9 @@ export function HeroSection() {
                 CREATIVE
               </motion.h1>
             </div>
-            <div className="overflow-hidden pl-8 md:pl-16">
+            <div className="overflow-hidden pl-4 xs:pl-6 md:pl-16">
               <motion.h1
-                className="editorial-heading text-[52px] md:text-[96px] lg:text-[108px] text-white leading-none"
+                className="editorial-heading text-[32px] xs:text-[40px] sm:text-[52px] md:text-[96px] lg:text-[108px] text-white leading-none"
                 initial={{ y: "110%", opacity: 0 }}
                 animate={{ y: "0%", opacity: 1 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
@@ -150,7 +150,7 @@ export function HeroSection() {
             </div>
             <div className="overflow-hidden">
               <motion.h1
-                className="editorial-heading text-[52px] md:text-[96px] lg:text-[108px] text-foreground/20 leading-none"
+                className="editorial-heading text-[32px] xs:text-[40px] sm:text-[52px] md:text-[96px] lg:text-[108px] text-foreground/20 leading-none"
                 initial={{ y: "110%", opacity: 0 }}
                 animate={{ y: "0%", opacity: 1 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.34 }}
@@ -172,7 +172,7 @@ export function HeroSection() {
 
           {/* CTA row */}
           <motion.div
-            className="flex items-center gap-4"
+            className="flex items-center gap-4 flex-wrap"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.62 }}
@@ -394,7 +394,7 @@ export function WorkflowSection() {
         <div className="flex items-end justify-between">
           <div>
             <span className="mono-label text-foreground/30 block mb-3">FLOWGEN PIPELINE ARCHITECTURE</span>
-            <h2 className="editorial-heading text-[52px] md:text-[72px] leading-none text-foreground">
+            <h2 className="editorial-heading text-3xl xs:text-4xl md:text-[72px] leading-none text-foreground">
               BULK ENGINE<br />
               <span style={{ color: "#39FF14" }}>ARCHITECTURE.</span>
             </h2>
@@ -515,7 +515,7 @@ export function EditorPreviewSection() {
       <div className="relative max-w-[1400px] mx-auto px-4 md:px-8">
         {/* Section heading */}
         <BlueprintReveal className="mb-14" delay={0}>
-          <h2 className="editorial-heading text-[52px] md:text-[72px] leading-none text-white">
+          <h2 className="editorial-heading text-3xl xs:text-4xl md:text-[72px] leading-none text-white">
             FUTURISTIC<br />
             <span style={{ color: "#39FF14" }}>WORKSPACE.</span>
           </h2>
@@ -737,7 +737,7 @@ export function EcosystemHub() {
           <div className="flex items-end justify-between mb-16">
             <div>
               <span className="mono-label text-foreground/30 block mb-3">§SYSTEM MODULES</span>
-              <h2 className="editorial-heading text-[52px] md:text-[72px] leading-none text-foreground">
+              <h2 className="editorial-heading text-3xl xs:text-4xl md:text-[72px] leading-none text-foreground">
                 CREATIVE<br />
                 <span style={{ color: "#39FF14" }}>COLLECTIVE.</span>
               </h2>

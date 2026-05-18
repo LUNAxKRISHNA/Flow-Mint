@@ -285,3 +285,15 @@
     scrollbar-width: none;  /* Firefox */
   }
 }
+
+/* ── Canvas placeholder drag: prevent mobile scroll interception ─── */
+[data-ph-id] {
+  touch-action: none;
+}
+
+/* ── Editorial heading: fix line collision when wrapping on mobile ── */
+@media (max-width: 639px) {
+  .editorial-heading {
+    line-height: 1.05;
+  }
+}

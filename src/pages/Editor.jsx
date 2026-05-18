@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
-import { ArrowLeft, Save, Play, ChevronDown } from "lucide-react"
+import { ArrowLeft, Save, Play, ChevronDown, PanelRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Toolbar from "@/components/editor/Toolbar"
 import Canvas from "@/components/editor/Canvas"
@@ -36,9 +36,11 @@ export default function Editor() {
 
   const canvasSizeRef = useRef({ w: 794, h: 1123 })
   const [zoom, setZoom] = useState(1)
+  const [showInspector, setShowInspector] = useState(false)
 
   const handleZoomIn = useCallback(() => setZoom(prev => Math.min(prev + 0.1, 2)), [])
   const handleZoomOut = useCallback(() => setZoom(prev => Math.max(prev - 0.1, 0.5)), [])
+  const handleAutoZoom = useCallback((autoZoom) => setZoom(autoZoom), [])
 
   const selectedPlaceholder = placeholders.find((p) => p.id === selectedId) ?? null
 
@@ -164,28 +166,41 @@ export default function Editor() {
   }, [csvData, placeholders, mappings, templateImage, exportFormat, filenameHeader])
 
   return (
-    <div className="h-screen w-screen flex flex-col bg-background font-['Space_Grotesk'] pt-16">
+    <div className="h-dvh w-full flex flex-col bg-background font-['Space_Grotesk'] pt-16">
       {/* Top Header */}
       <header className="h-14 border-b border-border flex items-center justify-between px-4 bg-card/50 z-50 relative">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 min-w-0">
           <Button variant="ghost" size="icon" onClick={() => navigate("/setup")}>
             <ArrowLeft className="h-4 w-4" />
           </Button>
-          <div className="h-4 w-px bg-border mx-1" />
-          <h1 className="font-medium text-sm truncate max-w-[240px]">{fileName}</h1>
-          <span className="text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded-sm shrink-0">Draft</span>
-          {/* Placeholder count badge */}
+          <div className="h-4 w-px bg-border mx-1 shrink-0" />
+          <h1 className="font-medium text-sm truncate max-w-[120px] xs:max-w-[160px] md:max-w-[240px]">{fileName}</h1>
+          <span className="hidden sm:inline text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded-sm shrink-0">Draft</span>
           {placeholders.length > 0 && (
-            <span className="text-xs font-mono text-[#39FF14] bg-[#39FF14]/10 px-2 py-0.5 rounded-sm border border-[#39FF14]/20 shrink-0">
+            <span className="hidden sm:inline text-xs font-mono text-[#39FF14] bg-[#39FF14]/10 px-2 py-0.5 rounded-sm border border-[#39FF14]/20 shrink-0">
               {placeholders.length} field{placeholders.length !== 1 ? "s" : ""}
             </span>
           )}
         </div>
 
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm">
-            <Save className="h-4 w-4 mr-2" />
-            Save
+          {/* Mobile inspector toggle */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={() => setShowInspector(prev => !prev)}
+            title="Toggle Inspector"
+          >
+            <PanelRight className="h-4 w-4" />
+          </Button>
+
+          <Button variant="outline" size="sm" className="hidden sm:flex">
+            <Save className="h-4 w-4 sm:mr-2" />
+            <span className="hidden sm:inline">Save</span>
+          </Button>
+          <Button variant="ghost" size="icon" className="sm:hidden">
+            <Save className="h-4 w-4" />
           </Button>
 
           {/* Format toggle + Generate button */}
@@ -230,46 +245,51 @@ export default function Editor() {
             {/* Generate button */}
             <button
               onClick={handleGenerate}
-              className="flex items-center gap-2 px-4 py-1.5 font-mono text-[10px] tracking-widest uppercase font-bold text-black hover:opacity-90 transition-opacity"
+              className="flex items-center gap-2 px-3 sm:px-4 py-1.5 font-mono text-[10px] tracking-widest uppercase font-bold text-black hover:opacity-90 transition-opacity"
               style={{ background: "#39FF14" }}
             >
               <Play className="h-3 w-3" />
-              Generate {csvData.rows.length > 0 ? `(${csvData.rows.length})` : ""}
+              <span className="hidden sm:inline">Generate {csvData.rows.length > 0 ? `(${csvData.rows.length})` : ""}</span>
             </button>
           </div>
         </div>
       </header>
 
       {/* Main Workspace */}
-      <main className="flex-1 flex overflow-hidden">
-        {/* Left Toolbar */}
-        <Toolbar
-          onOpenCsvModal={() => setIsCsvModalOpen(true)}
-          onAddPlaceholder={handleAddPlaceholder}
-          onZoomIn={handleZoomIn}
-          onZoomOut={handleZoomOut}
-        />
+      <main className="flex-1 flex flex-col md:flex-row overflow-hidden">
+        {/* Left Toolbar — bottom bar on mobile (order-last), left sidebar on desktop */}
+        <div className="order-last md:order-first">
+          <Toolbar
+            onOpenCsvModal={() => setIsCsvModalOpen(true)}
+            onAddPlaceholder={handleAddPlaceholder}
+            onZoomIn={handleZoomIn}
+            onZoomOut={handleZoomOut}
+          />
+        </div>
 
         {/* Center Canvas */}
-        <div className="flex-1 overflow-auto relative bg-[#f0f0ee]">
+        <div className="flex-1 overflow-auto relative bg-[#f0f0ee] order-first md:order-none">
           <Canvas
             templateImage={templateImage}
             placeholders={placeholders}
             selectedId={selectedId}
-            onSelectId={setSelectedId}
+            onSelectId={(id) => { setSelectedId(id); if (id) setShowInspector(true) }}
             onPositionChange={handlePositionChange}
             onResize={handleResize}
             onPropertyChange={handlePropertyChange}
             onCanvasSizeChange={handleCanvasSizeChange}
+            onAutoZoom={handleAutoZoom}
             zoom={zoom}
           />
         </div>
 
-        {/* Right Properties Panel */}
+        {/* Right Properties Panel — sidebar on desktop, bottom sheet on mobile */}
         <PropertiesPanel
           placeholder={selectedPlaceholder}
           onPropertyChange={handlePropertyChange}
           onDelete={handleDeletePlaceholder}
+          isOpen={showInspector}
+          onClose={() => setShowInspector(false)}
         />
       </main>
 

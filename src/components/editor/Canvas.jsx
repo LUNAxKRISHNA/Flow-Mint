@@ -11,9 +11,11 @@ export default function Canvas({
   onResize,
   onPropertyChange,
   onCanvasSizeChange,
+  onAutoZoom,
   zoom = 1,
 }) {
   const [canvasSize, setCanvasSize] = useState({ w: 794, h: 1123 })
+  const containerRef = useRef(null)
 
   useEffect(() => {
     if (!templateImage) return
@@ -30,8 +32,26 @@ export default function Canvas({
     img.src = templateImage
   }, [templateImage, onCanvasSizeChange])
 
+  // Auto-zoom to fit the container when it's narrower than the canvas
+  useEffect(() => {
+    if (!containerRef.current) return
+    const el = containerRef.current
+    const updateZoom = () => {
+      const containerW = el.clientWidth
+      if (containerW > 0 && containerW < canvasSize.w + 80) {
+        const autoZoom = Math.max(0.3, parseFloat(((containerW - 80) / canvasSize.w).toFixed(2)))
+        onAutoZoom?.(autoZoom)
+      }
+    }
+    updateZoom()
+    const ro = new ResizeObserver(updateZoom)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [canvasSize.w, onAutoZoom])
+
   return (
     <div
+      ref={containerRef}
       className="absolute inset-0 flex items-start justify-center p-10"
       onClick={() => onSelectId(null)}
     >

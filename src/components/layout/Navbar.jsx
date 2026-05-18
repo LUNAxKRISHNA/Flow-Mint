@@ -54,15 +54,25 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* LEFT SIDE: Hamburger Menu (Mobile) */}
+        {/* LEFT SIDE: Hamburger / Close Toggle (Mobile) */}
         <div className="flex md:hidden items-center w-1/3 pl-2">
           <button
-            onClick={() => setMobileMenuOpen(true)}
+            onClick={() => setMobileMenuOpen(prev => !prev)}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             className="w-10 h-10 flex flex-col items-center justify-center gap-[4px] group"
           >
-            <span className="w-5 h-[1px] bg-[#1a1a1a] group-hover:bg-[#39FF14] transition-colors" />
-            <span className="w-5 h-[1px] bg-[#1a1a1a] group-hover:bg-[#39FF14] transition-colors" />
-            <span className="w-5 h-[1px] bg-[#1a1a1a] group-hover:bg-[#39FF14] transition-colors" />
+            {mobileMenuOpen ? (
+              <>
+                <span className="w-5 h-[1px] bg-[#1a1a1a] rotate-45 translate-y-[1px]" />
+                <span className="w-5 h-[1px] bg-[#1a1a1a] -rotate-45 -translate-y-[1px]" />
+              </>
+            ) : (
+              <>
+                <span className="w-5 h-[1px] bg-[#1a1a1a] group-hover:bg-[#39FF14] transition-colors" />
+                <span className="w-5 h-[1px] bg-[#1a1a1a] group-hover:bg-[#39FF14] transition-colors" />
+                <span className="w-5 h-[1px] bg-[#1a1a1a] group-hover:bg-[#39FF14] transition-colors" />
+              </>
+            )}
           </button>
         </div>
 
@@ -79,7 +89,7 @@ export default function Navbar() {
             }}
           >
             {/* Logo */}
-            <div className="relative w-36 h-18 flex items-center justify-center">
+            <div className="relative w-28 md:w-36 h-10 md:h-12 flex items-center justify-center">
               <img
                 src="/logo.png"
                 alt="FlowMint Logo"
@@ -136,17 +146,7 @@ export default function Navbar() {
                 <span className="text-[9px] font-mono text-[#1a1a1a]/40">02</span>
               </button>
             </div>
-            {/* Close button in mobile menu */}
-            <div className="absolute top-[-3rem] left-0 w-full h-16 flex items-center justify-start px-8 pointer-events-none">
-              <button
-                onClick={() => setMobileMenuOpen(false)}
-                className="pointer-events-auto w-10 h-10 flex flex-col items-center justify-center gap-[4px]"
-              >
-                {/* X icon */}
-                <span className="w-5 h-[1px] bg-[#1a1a1a] rotate-45 translate-y-[2.5px]" />
-                <span className="w-5 h-[1px] bg-[#1a1a1a] -rotate-45 -translate-y-[2.5px]" />
-              </button>
-            </div>
+
           </motion.div>
         )}
       </AnimatePresence>

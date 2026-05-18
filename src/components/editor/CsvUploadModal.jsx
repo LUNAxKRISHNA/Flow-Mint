@@ -80,7 +80,7 @@ export default function CsvUploadModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[640px] p-0 overflow-hidden bg-card border-border/40 font-['Space_Grotesk']">
+      <DialogContent className="w-full sm:max-w-[640px] max-h-[90dvh] overflow-y-auto p-0 overflow-x-hidden bg-card border-border/40 font-['Space_Grotesk']">
         <DialogHeader className="px-6 pt-6 pb-4 border-b border-border bg-muted/30 relative">
           <div className="absolute top-0 left-0 w-1 h-full bg-primary" />
           <DialogTitle className="text-xl flex items-center gap-2">
@@ -93,7 +93,7 @@ export default function CsvUploadModal({
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <div className="px-6 border-b border-border bg-muted/10 pt-2">
-            <TabsList className="bg-transparent h-auto p-0 space-x-8">
+            <TabsList className="bg-transparent h-auto p-0 space-x-4 sm:space-x-8">
               <TabsTrigger 
                 value="upload" 
                 className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-0 pb-3 pt-2 text-xs font-mono tracking-widest uppercase"
@@ -110,11 +110,11 @@ export default function CsvUploadModal({
             </TabsList>
           </div>
 
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             <TabsContent value="upload" className="m-0 focus-visible:outline-none flex flex-col gap-6">
-              <div 
+              <div
                 onClick={() => fileInputRef.current?.click()}
-                className="border-2 border-dashed border-border/20 rounded-lg p-10 flex flex-col items-center justify-center text-center bg-muted/5 hover:bg-primary/5 hover:border-primary/30 transition-all cursor-pointer group"
+                className="border-2 border-dashed border-border/20 rounded-lg p-6 sm:p-10 flex flex-col items-center justify-center text-center bg-muted/5 hover:bg-primary/5 hover:border-primary/30 transition-all cursor-pointer group"
               >
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                   <UploadCloud className="h-8 w-8 text-primary" />
@@ -195,7 +195,7 @@ export default function CsvUploadModal({
               <div className="border border-border/20 rounded overflow-hidden bg-muted/5 shadow-sm">
                 <div className="grid grid-cols-2 p-3 bg-muted/50 border-b border-border/20 font-mono text-[10px] text-foreground/60 uppercase tracking-[0.15em] font-bold">
                   <div>Placeholder Target</div>
-                  <div>CSV Source Origin</div>
+                  <div className="hidden sm:block">CSV Source Origin</div>
                 </div>
                 
                 <div className="divide-y divide-border/10 max-h-[200px] overflow-auto custom-scrollbar bg-card">
@@ -219,8 +219,8 @@ export default function CsvUploadModal({
               </div>
 
               {/* Technical Summary Panel */}
-              <div className="grid grid-cols-3 gap-3">
-                <div className="col-span-2 border border-border/20 p-4 rounded bg-muted/10 relative overflow-hidden group">
+              <div className="grid grid-cols-1 xs:grid-cols-3 gap-3">
+                <div className="xs:col-span-2 border border-border/20 p-4 rounded bg-muted/10 relative overflow-hidden group">
                    <div className="absolute top-0 right-0 p-2 opacity-10">
                       <FileSpreadsheet className="h-12 w-12" />
                    </div>

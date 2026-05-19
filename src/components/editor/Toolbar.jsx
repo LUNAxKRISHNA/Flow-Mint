@@ -27,7 +27,7 @@ export default function Toolbar({ onOpenCsvModal, onAddPlaceholder, onZoomIn, on
       <div className="h-px w-8 bg-border hidden md:block" />
       <div className="w-px h-8 bg-border md:hidden" />
 
-      <div className="mt-auto md:flex flex-row md:flex-col gap-2 flex flex-row">
+      <div className="mt-auto flex flex-row md:flex-col gap-2">
         <ToolbarButton icon={<ZoomIn />} label="Zoom In" onClick={onZoomIn} />
         <ToolbarButton icon={<ZoomOut />} label="Zoom Out" onClick={onZoomOut} />
       </div>

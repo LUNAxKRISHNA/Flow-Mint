@@ -2,6 +2,7 @@ import React from "react"
 import { motion } from "framer-motion"
 import { useNavigate } from "react-router-dom"
 import { ArrowLeft, Database, FileText, Zap, Layout, ArrowRight } from "lucide-react"
+import Footer from "@/components/layout/Footer"
 
 const Section = ({ title, icon: Icon, children, delay = 0 }) => (
   <motion.div
@@ -138,13 +139,8 @@ export default function Docs() {
           </div>
         </section>
 
-        {/* Footer Technical Note */}
-        <footer className="pt-12 border-t border-[#1a1a1a]/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-          <p className="text-[10px] font-mono tracking-[0.2em] uppercase opacity-30">
-            FlowMint Ecosystem // Modular Tools for Creative Workflows
-          </p>
-        </footer>
       </main>
+      <Footer />
     </div>
   )
 }

@@ -13,14 +13,12 @@ const NAV_COLUMNS = [
     label: "Documentation",
     links: [
       { text: "System Docs", path: "/docs" },
-      { text: "How it Works", path: "/docs" },
     ],
   },
   {
     label: "Ecosystem",
     links: [
       { text: "Bulk Engine", path: "/docs" },
-      { text: "Precision Mapping", path: "/docs" },
     ],
   },
 ]
@@ -79,7 +77,7 @@ export default function Footer() {
               <img
                 src="/logo.png"
                 alt="FlowMint Logo"
-                className="w-full h-full object-contain filter grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500"
+                className="w-full h-full object-contain filter brightness-50 group-hover:brightness-100 transition-all duration-500"
               />
             </div>
 
@@ -87,14 +85,6 @@ export default function Footer() {
             <p className="text-[12px] leading-relaxed text-[#1a1a1a]/50 max-w-xs">
               High-fidelity asynchronous document mapping and bulk generation engine.
             </p>
-
-            {/* Status badge */}
-            <div className="flex items-center gap-2.5">
-              <span className="status-pulse" />
-              <span className="font-mono text-[9px] tracking-[0.2em] text-[#1a1a1a]/40 uppercase">
-                System Status: Nominal
-              </span>
-            </div>
           </motion.div>
 
           {/* Navigation columns */}
@@ -134,36 +124,6 @@ export default function Footer() {
             </motion.div>
           ))}
         </div>
-
-        {/* Bottom divider */}
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-[#1a1a1a]/10 to-transparent mb-8" />
-
-        {/* Bottom bar: copyright + technical readouts */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          {/* Copyright */}
-          <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-[#1a1a1a]/25">
-            © {new Date().getFullYear()} FlowMint Ecosystem — Modular Tools for Creative Workflows
-          </span>
-
-          {/* Technical readouts */}
-          <div className="flex items-center gap-6">
-            <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-[#1a1a1a]/20">
-              Latency: &lt;2ms
-            </span>
-            <div className="w-px h-3 bg-[#1a1a1a]/10" />
-            <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-[#1a1a1a]/20">
-              Matrix v1.0.4
-            </span>
-            <div className="w-px h-3 bg-[#1a1a1a]/10" />
-            <span className="font-mono text-[8px] tracking-[0.15em] uppercase text-[#39FF14]/40">
-              Engine: Active
-            </span>
-          </div>
-        </div>
-
-        {/* Corner accent markers */}
-        <span className="absolute bottom-0 left-8 w-4 h-4 border-b border-l border-[#39FF14]/15 pointer-events-none" />
-        <span className="absolute bottom-0 right-8 w-4 h-4 border-b border-r border-[#39FF14]/15 pointer-events-none" />
       </div>
     </footer>
   )
